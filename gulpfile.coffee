@@ -12,4 +12,4 @@ if helper.isProduction
   taskDep.push "tox"
 g.task "default", taskDep, ->
   if not helper.isProduction
-    g.watch "wtf_otp/**/*.py", ["tox"]
+    g.watch ["wtf_otp/**/*.py", "tests/**/*.py"], ["tox"]
