@@ -1,0 +1,28 @@
+{
+  "name": "wtf_otp",
+  "version": "1.0.0",
+  "description": "One-Time Password Field for WTForm",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiroaki-yamamoto/wtf_otp.git"
+  },
+  "keywords": [
+    "WTF-OTP",
+    "python"
+  ],
+  "author": "Hiroaki Yamamoto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hiroaki-yamamoto/wtf_otp/issues"
+  },
+  "homepage": "https://github.com/hiroaki-yamamoto/wtf_otp#readme",
+  "devDependencies": {
+    "eslint": "^2.13.1",
+    "eslint-config-google": "^0.6.0",
+    "hyamamoto-job-toolbox": "^0.1.15"
+  }
+}
