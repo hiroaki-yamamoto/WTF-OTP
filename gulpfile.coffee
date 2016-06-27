@@ -4,7 +4,7 @@ helper = require "hyamamoto-job-toolbox/lib/helper"
 
 toolbox.python "", "wtf_otp", []
 
-g.task "tox", ["python.tox"], ->
+g.task "tox", ["python.tox.only"], ->
   toolbox.virtualenv "coverage combine python27.coverage python35.coverage"
 
 taskDep = []
