@@ -23,6 +23,8 @@
   "devDependencies": {
     "eslint": "^2.13.1",
     "eslint-config-google": "^0.6.0",
-    "hyamamoto-job-toolbox": "^0.1.15"
+    "hyamamoto-job-toolbox": "^0.1.15",
+    "q": "^1.4.1",
+    "rimraf": "^2.5.2"
   }
 }

@@ -6,7 +6,9 @@ import sys
 from setuptools import setup, find_packages
 
 dependencies = [
-    "WTForms==2.1"
+    "WTForms==2.1",
+    "pyotp==2.1.1",
+    "jinja2==2.8"
 ]
 name = "WTF-OTP"
 desc = "One-Time Password for WTForms"
