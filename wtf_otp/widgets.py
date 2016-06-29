@@ -4,7 +4,7 @@
 """OTP Widgets."""
 from wtforms.widgets import html_params, HTMLString
 
-from .templates import jquery_template
+from .templates import jquery_template, angular_template
 
 
 class OTPWidget(object):
@@ -43,12 +43,18 @@ class OTPWidget(object):
         input_widget = HTMLString((
             "<input type=\"text\" readonly {}>"
         ).format(html_params(**input_args)))
+
         button_args.setdefault("id", "btn-" + field.id)
+        if "data-ng-model" in input_args:
+            button_args["data-ng-click"] = ("click{}()").format(id(field))
         button_widget = HTMLString((
             "<button type=\"button\" {}>Get Secret Key</button>"
         ).format(html_params(**button_args) if button_args else ""))
         script_widget = HTMLString(
-            jquery_template.render(
+            angular_template.render(
+                fieldid=id(field), inputid=input_args["id"],
+                ng_model=input_args["data-ng-model"]
+            ) if "data-ng-model" in input_args else jquery_template.render(
                 btnid=button_args["id"], inputid=input_args["id"]
             )
         )

@@ -17,3 +17,24 @@ jquery_template = Template(
     "})})()"
     "</script>"
 )
+
+
+angular_template = Template(
+    "<script>"
+    "(function() {"
+    "angular.module(\"{{inputid}}ControllerOTP\",["
+    "]).controller(\"{{inputid}}ControllerOTP\",["
+    "\"$scope\","
+    "function(scope){"
+    "var m=\"ABCDEFGHIJKLMNOPQRSTUVWXYZ234567\",v=[],i;"
+    "scope.click{{fieldid}}=function(){"
+    "for(i=0;i<16;i++){"
+    "v.push(m[Math.floor(Math.random()*32)]);"
+    "}"
+    "scope.{{ng_model}}=v.join(\"\");"
+    "};"
+    "}"
+    "]);"
+    "})()"
+    "</script>"
+)
