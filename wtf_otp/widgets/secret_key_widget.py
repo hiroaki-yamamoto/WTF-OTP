@@ -11,32 +11,30 @@ class OTPSecretKeyWidget(object):
     """
     OTP Widget.
 
-    This widget includes QR-code, readonly input, and "Get Secret Key" button.
+    This widget readonly input, and "Get Secret Key" button.
     Clicking the "Generate" button, a new secret key is generated thru
-    browser-side generator. Changing secret key, the QR-code is also changed.
+    browser-side generator.
     """
 
-    def __call__(self, field, otp_method="totp", input_args=None,
-                 button_args=None, div_args=None, **kwargs):
+    def __call__(self, field, **kwargs):
         """
         Generate OTPWidget.
 
         Parameters:
-            **kwargs: Alias of input_args. When input_args is also specified,
-                this is merged to input_args.
-                i.e. input_args.update(kwargs) is called.
+            **kwargs: Any arguments to be applied to input.
+                If input_args has dict value, input_args.update(kwargs) is
+                called after parameter transformation.
+                Note that the values of button_args and div_args are applied
+                to button and div. For details, refer keyword arguments.
         Keyword Arguments:
-            otp_method: Set "totp" if you want to use time-based otp, or
-                "hotp" if you want to use Counter-Based otp.
-            input_args: Any arguments to be applied to readonly
-                input only.
+            input_args: Any arguments to be applied to input.
             button_args: Any arguments to be applied to button only.
             div_args: Any argument that to applied to div wrap.
                 i.e. inputs are wrapped with div tags.
         """
-        input_args = {} if not input_args else input_args
-        button_args = {} if not button_args else button_args
-        div_args = {} if not div_args else div_args
+        input_args = kwargs.pop("input_args", {})
+        button_args = kwargs.pop("button_args", {})
+        div_args = kwargs.pop("div_args", {})
 
         input_args.update(kwargs)
         input_args.setdefault("id", field.id)

@@ -4,5 +4,6 @@
 """WTF-OTP module."""
 
 from .widgets import OTPSecretKeyWidget
+from .fields import OTPSecretKeyField
 
-__all__ = ("OTPSecretKeyWidget",)
+__all__ = ("OTPSecretKeyWidget", "OTPSecretKeyField")
