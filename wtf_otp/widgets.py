@@ -16,26 +16,28 @@ class OTPSecretKeyWidget(object):
     browser-side generator. Changing secret key, the QR-code is also changed.
     """
 
-    def __call__(self, field, qr_code=True, otp_method="totp",
-                 input_args=None, button_args=None, **kwargs):
+    def __call__(self, field, otp_method="totp", input_args=None,
+                 button_args=None, div_args=None, **kwargs):
         """
         Generate OTPWidget.
 
         Parameters:
             **kwargs: Alias of input_args. When input_args is also specified,
                 this is merged to input_args.
-                i.e. input_args.update is called.
+                i.e. input_args.update(kwargs) is called.
         Keyword Arguments:
-            qr_code: Set False if you DON'T want to generate QR-Code of
-                Secret Key.
             otp_method: Set "totp" if you want to use time-based otp, or
                 "hotp" if you want to use Counter-Based otp.
-            input_args: Any arguments that should be applied to readonly
+            input_args: Any arguments to be applied to readonly
                 input only.
-            button_args: Any arguments that should be applied to button only.
+            button_args: Any arguments to be applied to button only.
+            div_args: Any argument that to applied to div wrap.
+                i.e. inputs are wrapped with div tags.
         """
         input_args = {} if not input_args else input_args
         button_args = {} if not button_args else button_args
+        div_args = {} if not div_args else div_args
+
         input_args.update(kwargs)
         input_args.setdefault("id", field.id)
         input_args.setdefault("name", field.name)
@@ -49,15 +51,22 @@ class OTPSecretKeyWidget(object):
         # attributes.
         if "data-ng-model" in input_args:
             button_args["data-ng-click"] = ("click{}()").format(id(field))
+            div_args["data-ng-controller"] = ("OTP{}Controller").format(
+                id(field)
+            )
         button_widget = HTMLString((
             "<button type=\"button\" {}>Get Secret Key</button>"
         ).format(html_params(**button_args) if button_args else ""))
+        div_widget = ("<div {}>").format(
+            html_params(**div_args)
+        ) if div_args else "<div>"
         script_widget = HTMLString(
             angular_template.render(
-                fieldid=id(field), inputid=input_args["id"],
-                ng_model=input_args["data-ng-model"]
+                fieldid=id(field), ng_model=input_args["data-ng-model"]
             ) if "data-ng-model" in input_args else jquery_template.render(
                 btnid=button_args["id"], inputid=input_args["id"]
             )
         )
-        return ("").join([input_widget, button_widget, script_widget])
+        return ("").join([
+            div_widget, input_widget, button_widget, script_widget, "</div>"
+        ])

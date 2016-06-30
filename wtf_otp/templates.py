@@ -22,8 +22,8 @@ jquery_template = Template(
 angular_template = Template(
     "<script>"
     "(function() {"
-    "angular.module(\"{{inputid}}ControllerOTP\",["
-    "]).controller(\"{{inputid}}ControllerOTP\",["
+    "angular.module(\"OTP{{fieldid}}Controller\",["
+    "]).controller(\"OTP{{fieldid}}Controller\",["
     "\"$scope\","
     "function(scope){"
     "var m=\"ABCDEFGHIJKLMNOPQRSTUVWXYZ234567\",v=[],i;"
