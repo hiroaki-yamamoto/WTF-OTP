@@ -1,4 +1,4 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-"""OTP Widget Tests."""
+"""OTP Secret Field Tests."""

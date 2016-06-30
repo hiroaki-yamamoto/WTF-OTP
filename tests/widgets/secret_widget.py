@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-"""OTP Widget Tests."""
+"""OTP Secret Ket Widget Tests."""
 
 from unittest import TestCase
 from wtforms.widgets import HTMLString, html_params
 from wtf_otp import OTPSecretKeyWidget
-from wtf_otp.templates import jquery_template, angular_template
+from wtf_otp.widgets.templates import jquery_template, angular_template
 
 
 class OTPTestField(object):
