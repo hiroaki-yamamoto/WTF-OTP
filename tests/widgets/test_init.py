@@ -5,7 +5,7 @@
 
 from unittest import TestCase
 from wtforms.widgets import HTMLString, html_params
-from wtf_otp import OTPWidget
+from wtf_otp import OTPSecretKeyWidget
 from wtf_otp.templates import jquery_template, angular_template
 
 
@@ -25,7 +25,7 @@ class OTPWidgetNormalInitTest(TestCase):
     def setUp(self):
         """Setup."""
         self.field = OTPTestField()
-        self.widget = OTPWidget()
+        self.widget = OTPSecretKeyWidget()
         self.expected = HTMLString(
             "<input type=\"text\" readonly {}>"
             "<button type=\"button\" {}>Get Secret Key</button>{}"
@@ -50,7 +50,7 @@ class OTPWidgetAngularInitTest(TestCase):
         """Setup."""
         self.field = OTPTestField()
         self.field.render_kw = {"data-ng-model": "test.data"}
-        self.widget = OTPWidget()
+        self.widget = OTPSecretKeyWidget()
         self.expected = HTMLString(
             "<input type=\"text\" readonly {}>"
             "<button type=\"button\" {}>Get Secret Key</button>{}"

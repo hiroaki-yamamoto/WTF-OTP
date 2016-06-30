@@ -7,7 +7,7 @@ from wtforms.widgets import html_params, HTMLString
 from .templates import jquery_template, angular_template
 
 
-class OTPWidget(object):
+class OTPSecretKeyWidget(object):
     """
     OTP Widget.
 
@@ -17,7 +17,7 @@ class OTPWidget(object):
     """
 
     def __call__(self, field, qr_code=True, otp_method="totp",
-                 input_args={}, button_args={}, **kwargs):
+                 input_args=None, button_args=None, **kwargs):
         """
         Generate OTPWidget.
 
@@ -34,9 +34,8 @@ class OTPWidget(object):
                 input only.
             button_args: Any arguments that should be applied to button only.
         """
-        # Because I strongly recommend to use data-* attribute for custom
-        # attributes, angular aimed option is available only for data-*
-        # attributes.
+        input_args = {} if not input_args else input_args
+        button_args = {} if not button_args else button_args
         input_args.update(kwargs)
         input_args.setdefault("id", field.id)
         input_args.setdefault("name", field.name)
@@ -45,6 +44,9 @@ class OTPWidget(object):
         ).format(html_params(**input_args)))
 
         button_args.setdefault("id", "btn-" + field.id)
+        # Because I strongly recommend to use data-* attribute for custom
+        # attributes, angular aimed option is available only for data-*
+        # attributes.
         if "data-ng-model" in input_args:
             button_args["data-ng-click"] = ("click{}()").format(id(field))
         button_widget = HTMLString((

@@ -3,6 +3,6 @@
 
 """WTF-OTP module."""
 
-from .widgets import OTPWidget
+from .widgets import OTPSecretKeyWidget
 
-__all__ = ("OTPWidget",)
+__all__ = ("OTPSecretKeyWidget",)
