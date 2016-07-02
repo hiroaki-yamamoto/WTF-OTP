@@ -119,3 +119,48 @@ class OTPWidgetJQueryQRCodeTest(TestCase):
             qrcode_url="/qrcode"
         )
         self.assertEqual(result, self.expected)
+
+
+class OTPWidgetAngularQRCodeTest(TestCase):
+    """Angular QR-code Generation Tests."""
+
+    def setUp(self):
+        """Setup."""
+        self.field = OTPTestField()
+        self.field.render_kw = {"data-ng-model": "test.data"}
+        self.widget = OTPSecretKeyWidget()
+        self.expected = HTMLString(
+            "<div {}>"
+            "<img id=\"otpauthQR{}\">"
+            "<input type=\"text\" readonly {}>"
+            "<button type=\"button\" {}>Get Secret Key</button>{}"
+            "</div>"
+        ).format(
+            html_params(**{
+                "class": "form-group",
+                "data-ng-controller": ("OTP{}Controller").format(
+                    id(self.field)
+                )
+            }),
+            self.field.id,
+            html_params(
+                id=self.field.id, name=self.field.name,
+                **self.field.render_kw
+            ),
+            html_params(id="btn-" + self.field.id, **{
+                "data-ng-click": ("click{}()").format(id(self.field))
+            }),
+            angular_template.render(
+                fieldid=id(self.field), inputid=self.field.id,
+                ng_model=self.field.render_kw["data-ng-model"],
+                qrcode_url="/qrcode"
+            )
+        )
+
+    def test_call(self):
+        """The widget should generate angularjs based widget with qrcode."""
+        result = self.widget(
+            self.field, div_args={"class": "form-group"},
+            qrcode_url="/qrcode", **self.field.render_kw
+        )
+        self.assertEqual(result, self.expected)
