@@ -8,14 +8,17 @@ from setuptools import setup, find_packages
 dependencies = [
     "WTForms==2.1",
     "pyotp==2.1.1",
-    "jinja2==2.8"
+    "jinja2==2.8",
+    "qrcode==5.3"
 ]
 name = "WTF-OTP"
 desc = "One-Time Password for WTForms"
 version = "0.0.0"
 
 if sys.version_info < (2, 7):
-    raise RuntimeError("Not supported on earlier then python 2.7.")
+    raise RuntimeError(
+        "Not supported on python that is older then version 2.7."
+    )
 
 try:
     with open('README.rst') as readme:

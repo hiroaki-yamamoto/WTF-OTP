@@ -86,3 +86,36 @@ class OTPWidgetAngularInitTest(TestCase):
             **self.field.render_kw
         )
         self.assertEqual(result, self.expected)
+
+
+class OTPWidgetJQueryQRCodeTest(TestCase):
+    """JQuery QR-code Generation Tests."""
+
+    def setUp(self):
+        """Setup."""
+        self.field = OTPTestField()
+        self.widget = OTPSecretKeyWidget()
+        self.expected = HTMLString(
+            "<div {}>"
+            "<img id=\"otpauthQR{}\">"
+            "<input type=\"text\" readonly {}>"
+            "<button type=\"button\" {}>Get Secret Key</button>{}"
+            "</div>"
+        ).format(
+            html_params(**{"class": "form-group"}),
+            self.field.id,
+            html_params(id=self.field.id, name=self.field.name),
+            html_params(id="btn-" + self.field.id),
+            jquery_template.render(
+                btnid=("btn-{}").format(self.field.id), inputid=self.field.id,
+                qrcode_url="/qrcode"
+            )
+        )
+
+    def test_call(self):
+        """The widget should generate jquery based widget with qrcode."""
+        result = self.widget(
+            self.field, div_args={"class": "form-group"},
+            qrcode_url="/qrcode"
+        )
+        self.assertEqual(result, self.expected)

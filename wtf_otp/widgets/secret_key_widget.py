@@ -35,6 +35,7 @@ class OTPSecretKeyWidget(object):
         input_args = kwargs.pop("input_args", {})
         button_args = kwargs.pop("button_args", {})
         div_args = kwargs.pop("div_args", {})
+        qrcode = kwargs.pop("qrcode_url", None)
 
         input_args.update(kwargs)
         input_args.setdefault("id", field.id)
@@ -60,11 +61,27 @@ class OTPSecretKeyWidget(object):
         ) if div_args else "<div>"
         script_widget = HTMLString(
             angular_template.render(
-                fieldid=id(field), ng_model=input_args["data-ng-model"]
+                fieldid=id(field), ng_model=input_args["data-ng-model"],
+                qrcode_url=qrcode
             ) if "data-ng-model" in input_args else jquery_template.render(
-                btnid=button_args["id"], inputid=input_args["id"]
+                btnid=button_args["id"], inputid=input_args["id"],
+                qrcode_url=qrcode
             )
         )
-        return ("").join([
-            div_widget, input_widget, button_widget, script_widget, "</div>"
-        ])
+
+        qrcode_tag = HTMLString(
+            ("<img {}>").format(
+                html_params(id=("otpauthQR{}").format(field.id))
+            )
+        )
+
+        output_widget = [widget for widget in [
+            div_widget,
+            qrcode_tag if qrcode else None,
+            input_widget,
+            button_widget,
+            script_widget,
+            "</div>"
+        ] if widget]
+
+        return ("").join(output_widget)
