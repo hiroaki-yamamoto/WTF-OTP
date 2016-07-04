@@ -3,10 +3,10 @@
 
 """SecretKeyField module."""
 
-import random
 from wtforms.fields import Field
 
 from ..widgets import OTPSecretKeyWidget
+from pyotp import random_base32
 
 
 class OTPSecretKeyField(Field):
@@ -21,12 +21,14 @@ class OTPSecretKeyField(Field):
 
     widget = OTPSecretKeyWidget()
 
-    def generate(self):
+    def generate(self, **kwargs):
         """
         Generate Secret Key.
 
+        Parameters:
+            **kwargs: Optional. Any keyword arguments to be passed to
+            `pyotp.random_base32`.
+
         Return Value: 16 chars random string that is able to be a secret key.
         """
-        return ("").join([random.choice(
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
-        ) for unused in range(16)])
+        return random_base32(**kwargs)
