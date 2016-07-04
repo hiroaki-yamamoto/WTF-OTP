@@ -38,7 +38,7 @@ angular_template = Template(
     "}"
     "scope.{{ng_model}}=v.join(\"\");"
     "{% if qrcode_url %}"
-    "scope.imageUrl=\"{{ qrcode_url }}?secret=\"+v;"
+    "scope.qrcode={'url': \"{{ qrcode_url }}?secret=\"+v};"
     "{% endif %}"
     "};"
     "}"
