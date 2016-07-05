@@ -63,16 +63,18 @@ class SecretFieldQRCodeGenerationTest(FieldTestBase):
     """Secret field qrcode generation test."""
 
     @patch("wtf_otp.fields.secret_key.build_otp_uri")
-    def setUp(self, target_func):
+    @patch("wtf_otp.fields.secret_key.generate_qrcode")
+    def setUp(self, qrcode_mock, otpurl):
         """Setup."""
         super(SecretFieldQRCodeGenerationTest, self).setUp()
-        self.target_func = target_func
+        self.otpurl = otpurl
+        self.qrcode_mock = qrcode_mock
         self.secret = self.form.otp.generate()
         self.param = {
             "name": "test@example.com",
             "issuer_name": "Test Issuer"
         }
-        self.target_func.return_value = \
+        self.otpurl.return_value = \
             ("otpauth://totp/Test Issuer:test@example.com?secret={}").format(
                 self.secret
             )
@@ -81,32 +83,26 @@ class SecretFieldQRCodeGenerationTest(FieldTestBase):
         )
 
     def test_param(self):
-        """The arguments should be passed to the target function as-is."""
-        self.target_func.assert_called_once_with(self.secret, **self.param)
+        """The arguments should be passed to the otpurl as-is."""
+        self.otpurl.assert_called_once_with(self.secret, **self.param)
 
-    def test_filetype(self):
-        """The text type should be svg."""
-        from xml.etree import ElementTree
-        self.assertEqual(
-            ElementTree.fromstring(self.qr_code).tag,
-            "{http://www.w3.org/2000/svg}svg",
-            "The generated text is not SVG format."
-        )
+    # def test_filetype(self):
+    #     """The text type should be svg."""
+    #     from xml.etree import ElementTree
+    #     self.assertEqual(
+    #         ElementTree.fromstring(self.qr_code).tag,
+    #         "{http://www.w3.org/2000/svg}svg",
+    #         "The generated text is not SVG format."
+    #     )
 
     def test_qrcode_body(self):
-        """The message should be proper."""
+        """QRCode Generator should be called with proper args."""
+        from qrcode.image.svg import SvgImage as svg
         try:
             from urllib.parse import quote
         except ImportError:
             from urllib import quote
-
-        from io import BytesIO
-        from wand.image import Image
-
-        code = ""
-        with Image(blob=self.qr_code.encode()) as svg:
-            with BytesIO() as pipe:
-                svg.type = "grayscale"
-                svg.format = "png"
-                svg.save(file=pipe)
-        self.assertEqual(code, quote(self.target_func.return_value, "!@:/?="))
+        self.qrcode_mock.assert_called_once_with(
+            quote(self.otpurl.return_value, "!@:/?="),
+            image_factory=svg
+        )
