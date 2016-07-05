@@ -5,6 +5,7 @@
 
 import re
 from unittest import TestCase
+
 try:
     from unittest.mock import patch
 except ImportError:
@@ -56,3 +57,56 @@ class SecretFieldGenerationTest(FieldTestBase):
         }
         self.form.otp.generate(**test)
         generation.assert_called_once_with(**test)
+
+
+class SecretFieldQRCodeGenerationTest(FieldTestBase):
+    """Secret field qrcode generation test."""
+
+    @patch("wtf_otp.fields.secret_key.build_otp_uri")
+    def setUp(self, target_func):
+        """Setup."""
+        super(SecretFieldQRCodeGenerationTest, self).setUp()
+        self.target_func = target_func
+        self.secret = self.form.otp.generate()
+        self.param = {
+            "name": "test@example.com",
+            "issuer_name": "Test Issuer"
+        }
+        self.target_func.return_value = \
+            ("otpauth://totp/Test Issuer:test@example.com?secret={}").format(
+                self.secret
+            )
+        self.qr_code = self.form.otp.qrcode(
+            self.secret, **self.param
+        )
+
+    def test_param(self):
+        """The arguments should be passed to the target function as-is."""
+        self.target_func.assert_called_once_with(self.secret, **self.param)
+
+    def test_filetype(self):
+        """The text type should be svg."""
+        from xml.etree import ElementTree
+        self.assertEqual(
+            ElementTree.fromstring(self.qr_code).tag,
+            "{http://www.w3.org/2000/svg}svg",
+            "The generated text is not SVG format."
+        )
+
+    def test_qrcode_body(self):
+        """The message should be proper."""
+        try:
+            from urllib.parse import quote
+        except ImportError:
+            from urllib import quote
+
+        from io import BytesIO
+        from wand.image import Image
+
+        code = ""
+        with Image(blob=self.qr_code.encode()) as svg:
+            with BytesIO() as pipe:
+                svg.type = "grayscale"
+                svg.format = "png"
+                svg.save(file=pipe)
+        self.assertEqual(code, quote(self.target_func.return_value, "!@:/?="))

@@ -3,10 +3,20 @@
 
 """SecretKeyField module."""
 
+from io import BytesIO
+
+try:
+    from urllib.parse import quote
+except ImportError:
+    from urllib import quote
+
 from wtforms.fields import Field
+from pyotp import random_base32
+from pyotp.utils import build_uri as build_otp_uri
+from qrcode import make as generate_qrcode
+from qrcode.image.svg import SvgImage as svg
 
 from ..widgets import OTPSecretKeyWidget
-from pyotp import random_base32
 
 
 class OTPSecretKeyField(Field):
@@ -32,3 +42,19 @@ class OTPSecretKeyField(Field):
         Return Value: 16 chars random string that is able to be a secret key.
         """
         return random_base32(**kwargs)
+
+    def qrcode(self, secret, **kwargs):
+        """
+        Generate the QRCode SVG image.
+
+        This function returns SVG image that is able to be read by
+        Google Authenticator or Authy.
+        """
+        result = bytes()
+        with BytesIO() as stream:
+            generate_qrcode(
+                quote(build_otp_uri(secret, **kwargs), "!@:/?="),
+                image_factory=svg
+            ).save(stream)
+            result = stream.getvalue()
+        return result.decode("utf-8")
