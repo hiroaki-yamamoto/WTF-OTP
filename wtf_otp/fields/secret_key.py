@@ -5,11 +5,6 @@
 
 from io import BytesIO
 
-try:
-    from urllib.parse import quote
-except ImportError:
-    from urllib import quote
-
 from wtforms.fields import Field
 from pyotp import random_base32
 from pyotp.utils import build_uri as build_otp_uri
@@ -53,8 +48,7 @@ class OTPSecretKeyField(Field):
         result = bytes()
         with BytesIO() as stream:
             generate_qrcode(
-                quote(build_otp_uri(secret, **kwargs), "!@:/?="),
-                image_factory=svg
+                build_otp_uri(secret, **kwargs), image_factory=svg
             ).save(stream)
             result = stream.getvalue()
         return result.decode("utf-8")

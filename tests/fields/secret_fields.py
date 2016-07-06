@@ -75,7 +75,9 @@ class SecretFieldQRCodeGenerationTest(FieldTestBase):
             "issuer_name": "Test Issuer"
         }
         self.otpurl.return_value = \
-            ("otpauth://totp/Test Issuer:test@example.com?secret={}").format(
+            (
+                "otpauth://totp/Test%20Issuer:test@example.com?secret={}"
+            ).format(
                 self.secret
             )
         self.qr_code = self.form.otp.qrcode(
@@ -86,23 +88,9 @@ class SecretFieldQRCodeGenerationTest(FieldTestBase):
         """The arguments should be passed to the otpurl as-is."""
         self.otpurl.assert_called_once_with(self.secret, **self.param)
 
-    # def test_filetype(self):
-    #     """The text type should be svg."""
-    #     from xml.etree import ElementTree
-    #     self.assertEqual(
-    #         ElementTree.fromstring(self.qr_code).tag,
-    #         "{http://www.w3.org/2000/svg}svg",
-    #         "The generated text is not SVG format."
-    #     )
-
     def test_qrcode_body(self):
         """QRCode Generator should be called with proper args."""
         from qrcode.image.svg import SvgImage as svg
-        try:
-            from urllib.parse import quote
-        except ImportError:
-            from urllib import quote
         self.qrcode_mock.assert_called_once_with(
-            quote(self.otpurl.return_value, "!@:/?="),
-            image_factory=svg
+            self.otpurl.return_value, image_factory=svg
         )
