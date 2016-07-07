@@ -3,6 +3,7 @@
 
 """OTP Widgets."""
 from wtforms.widgets import html_params, HTMLString
+from jinja2 import Markup
 
 from .templates import jquery_template, angular_template
 
@@ -88,4 +89,4 @@ class OTPSecretKeyWidget(object):
             "</div>"
         ] if widget]
 
-        return ("").join(output_widget)
+        return Markup(("").join(output_widget))

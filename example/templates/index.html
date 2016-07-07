@@ -4,13 +4,20 @@
   <meta charset="UTF-8">
   <title>Example App for WTF-OTP</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="{{ url_for('.static', filename='jquery_script.js') }}" defer></script>
+  <!-- <script src="{{ url_for('.static', filename='jquery_script.js') }}" defer></script> -->
 </head>
 <body>
   <section>
     <header>
       <h1>jQuery Version</h1>
     </header>
+    <form action="/" method="post">
+      {% for field in jqform -%}
+        {% if field.name != 'csrf_token' -%}
+          {{ field.label() }} {{ field() }}
+        {%- endif %}
+      {%- endfor %}
+    </form>
   </section>
 </body>
 </html>

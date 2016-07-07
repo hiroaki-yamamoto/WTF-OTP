@@ -44,6 +44,9 @@ class OTPSecretKeyField(Field):
 
         This function returns SVG image that is able to be read by
         Google Authenticator or Authy.
+
+        Parameters:
+            **kwargs: Any keyword args to be passed to build_uri.
         """
         result = bytes()
         with BytesIO() as stream:
