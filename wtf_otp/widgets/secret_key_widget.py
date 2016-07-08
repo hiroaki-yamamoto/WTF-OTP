@@ -32,11 +32,13 @@ class OTPSecretKeyWidget(object):
             button_args: Any arguments to be applied to button only.
             div_args: Any argument that to applied to div wrap.
                 i.e. inputs are wrapped with div tags.
+            module: The module name to be attached.
         """
         input_args = kwargs.pop("input_args", {})
         button_args = kwargs.pop("button_args", {})
         div_args = kwargs.pop("div_args", {})
         qrcode = kwargs.pop("qrcode_url", None)
+        module = kwargs.pop("module", None)
 
         input_args.update(kwargs)
         input_args.setdefault("id", field.id)
@@ -51,6 +53,10 @@ class OTPSecretKeyWidget(object):
         # attributes.
         qrcodetag_attrs = {"id": ("otpauthQR{}").format(field.id)}
         if "data-ng-model" in input_args:
+            if not module:
+                raise ValueError(
+                    "AngularJS module name is needed to use AngularJS."
+                )
             button_args["data-ng-click"] = ("click{}()").format(id(field))
             div_args["data-ng-controller"] = ("OTP{}Controller").format(
                 id(field)
@@ -67,7 +73,8 @@ class OTPSecretKeyWidget(object):
         ) if div_args else "<div>"
         script_widget = HTMLString(
             angular_template.render(
-                fieldid=id(field), ng_model=input_args["data-ng-model"],
+                module=module, fieldid=id(field),
+                ng_model=input_args["data-ng-model"],
                 qrcode_url=qrcode
             ) if "data-ng-model" in input_args else jquery_template.render(
                 btnid=button_args["id"], inputid=input_args["id"],

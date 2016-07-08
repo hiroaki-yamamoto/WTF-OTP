@@ -13,15 +13,25 @@ app.config["SECRET_KEY"] = (
 
 
 class SecretKeyTestForm(Form):
-    otp_secret = OTPSecretKeyField(render_kw={
+    jquery_secret = OTPSecretKeyField(render_kw={
         "qrcode_url": "/qrcode"
+    })
+    jquery_secret_noqrcode = OTPSecretKeyField()
+    angular_secret = OTPSecretKeyField(render_kw={
+        "qrcode_url": "/qrcode",
+        "data-ng-model": "mdoel.test",
+        "module": "OTPApp"
+    })
+    angular_secret_noqrcode = OTPSecretKeyField(render_kw={
+        "data-ng-model": "mdoel.test_noqr",
+        "module": "OTPApp"
     })
 
 
 @app.route("/")
 def index():
-    jqform = SecretKeyTestForm()
-    return render_template("index.html", jqform=jqform)
+    form = SecretKeyTestForm()
+    return render_template("index.html", form=form)
 
 
 @app.route("/qrcode")
@@ -30,7 +40,7 @@ def render_qrcode():
     secret = request.args.get("secret")
     if not secret:
         abort(404)
-    resp = make_response(form.otp_secret.qrcode(
+    resp = make_response(form.jquery_secret_noqrcode.qrcode(
         secret, name="Test Example", issuer_name="Test Corp"
     ))
     resp.mimetype = "image/svg+xml"

@@ -4,6 +4,7 @@
 """OTP Secret Ket Widget Tests."""
 
 from unittest import TestCase
+from jinja2 import Markup
 from wtforms.widgets import HTMLString, html_params
 from wtf_otp import OTPSecretKeyWidget
 from wtf_otp.widgets.templates import jquery_template, angular_template
@@ -26,7 +27,7 @@ class OTPWidgetNormalInitTest(TestCase):
         """Setup."""
         self.field = OTPTestField()
         self.widget = OTPSecretKeyWidget()
-        self.expected = HTMLString(
+        self.expected = Markup(HTMLString(
             "<div {}>"
             "<input type=\"text\" readonly {}>"
             "<button type=\"button\" {}>Get Secret Key</button>{}"
@@ -38,7 +39,7 @@ class OTPWidgetNormalInitTest(TestCase):
             jquery_template.render(
                 btnid=("btn-{}").format(self.field.id), inputid=self.field.id
             )
-        )
+        ))
 
     def test_call(self):
         """The widget should generate jquery based widget."""
@@ -54,7 +55,7 @@ class OTPWidgetAngularInitTest(TestCase):
         self.field = OTPTestField()
         self.field.render_kw = {"data-ng-model": "test.data"}
         self.widget = OTPSecretKeyWidget()
-        self.expected = HTMLString(
+        self.expected = Markup(HTMLString(
             "<div {}>"
             "<input type=\"text\" readonly {}>"
             "<button type=\"button\" {}>Get Secret Key</button>{}"
@@ -74,15 +75,17 @@ class OTPWidgetAngularInitTest(TestCase):
                 "data-ng-click": ("click{}()").format(id(self.field))
             }),
             angular_template.render(
+                module="testModule",
                 fieldid=id(self.field), inputid=self.field.id,
                 ng_model=self.field.render_kw["data-ng-model"]
             )
-        )
+        ))
 
     def test_call(self):
         """The widget should generate AngularJS based view."""
         result = self.widget(
-            self.field, div_args={"class": "form-group"},
+            self.field, module="testModule",
+            div_args={"class": "form-group"},
             **self.field.render_kw
         )
         self.assertEqual(result, self.expected)
@@ -95,7 +98,7 @@ class OTPWidgetJQueryQRCodeTest(TestCase):
         """Setup."""
         self.field = OTPTestField()
         self.widget = OTPSecretKeyWidget()
-        self.expected = HTMLString(
+        self.expected = Markup(HTMLString(
             "<div {}>"
             "<img id=\"otpauthQR{}\">"
             "<input type=\"text\" readonly {}>"
@@ -110,7 +113,7 @@ class OTPWidgetJQueryQRCodeTest(TestCase):
                 btnid=("btn-{}").format(self.field.id), inputid=self.field.id,
                 qrcode_url="/qrcode"
             )
-        )
+        ))
 
     def test_call(self):
         """The widget should generate jquery based widget with qrcode."""
@@ -127,9 +130,11 @@ class OTPWidgetAngularQRCodeTest(TestCase):
     def setUp(self):
         """Setup."""
         self.field = OTPTestField()
-        self.field.render_kw = {"data-ng-model": "test.data"}
+        self.field.render_kw = {
+            "data-ng-model": "test.data"
+        }
         self.widget = OTPSecretKeyWidget()
-        self.expected = HTMLString(
+        self.expected = Markup(HTMLString(
             "<div {}>"
             "<img id=\"otpauthQR{}\">"
             "<input type=\"text\" readonly {}>"
@@ -151,16 +156,17 @@ class OTPWidgetAngularQRCodeTest(TestCase):
                 "data-ng-click": ("click{}()").format(id(self.field))
             }),
             angular_template.render(
-                fieldid=id(self.field), inputid=self.field.id,
+                module="testModule", fieldid=id(self.field),
+                inputid=self.field.id, qrcode_url="/qrcode",
                 ng_model=self.field.render_kw["data-ng-model"],
-                qrcode_url="/qrcode"
             )
-        )
+        ))
 
     def test_call(self):
         """The widget should generate angularjs based widget with qrcode."""
         result = self.widget(
             self.field, div_args={"class": "form-group"},
-            qrcode_url="/qrcode", **self.field.render_kw
+            module="testModule", qrcode_url="/qrcode",
+            **self.field.render_kw
         )
         self.assertEqual(result, self.expected)
