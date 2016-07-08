@@ -15,11 +15,13 @@ jquery_template = Template(
     "v=v.join(\"\");"
     "$(\"#{{inputid}}\").val(v);"
     "{% if qrcode_url %}"
-    "$(\"#otpauthQR{{inputid}}\").attr("
-    "{\"src\": \"{{qrcode_url}}?secret=\"+v}"
-    ");"
+    "$(\"#otpauthQR{{inputid}}\").css({"
+    "\"background-image\":\"url('{{qrcode_url}}?secret=\"+v+\"')\","
+    "\"background-size\":\"cover\""
+    "});"
     "{% endif %}"
-    "})})()"
+    "});"
+    "})()"
     "</script>"
 )
 

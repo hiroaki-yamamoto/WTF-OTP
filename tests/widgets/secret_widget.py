@@ -100,13 +100,13 @@ class OTPWidgetJQueryQRCodeTest(TestCase):
         self.widget = OTPSecretKeyWidget()
         self.expected = Markup(HTMLString(
             "<div {}>"
-            "<img id=\"otpauthQR{}\">"
+            "<div {}></div>"
             "<input type=\"text\" readonly {}>"
             "<button type=\"button\" {}>Get Secret Key</button>{}"
             "</div>"
         ).format(
             html_params(**{"class": "form-group"}),
-            self.field.id,
+            html_params(id=("otpauthQR{}").format(self.field.id)),
             html_params(id=self.field.id, name=self.field.name),
             html_params(id="btn-" + self.field.id),
             jquery_template.render(
@@ -136,7 +136,7 @@ class OTPWidgetAngularQRCodeTest(TestCase):
         self.widget = OTPSecretKeyWidget()
         self.expected = Markup(HTMLString(
             "<div {}>"
-            "<img id=\"otpauthQR{}\">"
+            "<div {}></div>"
             "<input type=\"text\" readonly {}>"
             "<button type=\"button\" {}>Get Secret Key</button>{}"
             "</div>"
@@ -147,7 +147,12 @@ class OTPWidgetAngularQRCodeTest(TestCase):
                     id(self.field)
                 )
             }),
-            self.field.id,
+            html_params(**{
+                "id": ("otpauthQR{}").format(self.field.id),
+                "data-ng-style": (
+                    "{\"background\": \"url(\"+{{qrcode.url}}+\")\"}"
+                )
+            }),
             html_params(
                 id=self.field.id, name=self.field.name,
                 **self.field.render_kw

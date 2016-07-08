@@ -58,11 +58,13 @@ class OTPSecretKeyWidget(object):
                     "AngularJS module name is needed to use AngularJS."
                 )
             button_args["data-ng-click"] = ("click{}()").format(id(field))
-            div_args["data-ng-controller"] = ("OTP{}Controller").format(
-                id(field)
-            )
-            qrcodetag_attrs = qrcodetag_attrs.update({
-                "data-ng-src": "qrcode.url"
+            div_args.update({
+                "data-ng-controller": ("OTP{}Controller").format(id(field))
+            })
+            qrcodetag_attrs.update({
+                "data-ng-style": (
+                    "{\"background\": \"url(\"+{{qrcode.url}}+\")\"}"
+                )
             })
         button_widget = HTMLString((
             "<button type=\"button\" {}>Get Secret Key</button>"
@@ -82,9 +84,8 @@ class OTPSecretKeyWidget(object):
             )
         )
 
-        qrcodetag_attrs = {"id": ("otpauthQR{}").format(field.id)}
         qrcode_tag = HTMLString(
-            ("<img {}>").format(html_params(**qrcodetag_attrs))
+            ("<div {}></div>").format(html_params(**qrcodetag_attrs))
         )
 
         output_widget = [widget for widget in [
