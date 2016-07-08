@@ -9,7 +9,7 @@ from wtforms.fields import Field
 from pyotp import random_base32
 from pyotp.utils import build_uri as build_otp_uri
 from qrcode import make as generate_qrcode
-from qrcode.image.svg import SvgImage as svg
+from qrcode.image.svg import SvgPathImage as svg
 
 from ..widgets import OTPSecretKeyWidget
 

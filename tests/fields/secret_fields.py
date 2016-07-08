@@ -90,7 +90,7 @@ class SecretFieldQRCodeGenerationTest(FieldTestBase):
 
     def test_qrcode_body(self):
         """QRCode Generator should be called with proper args."""
-        from qrcode.image.svg import SvgImage as svg
+        from qrcode.image.svg import SvgPathImage as svg
         self.qrcode_mock.assert_called_once_with(
             self.otpurl.return_value, image_factory=svg
         )
