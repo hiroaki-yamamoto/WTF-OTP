@@ -7,8 +7,10 @@ rimraf = require "rimraf"
 toolbox.python "", "wtf_otp", []
 
 g.task "tox", ["python.tox.only"], ->
-  toolbox.virtualenv(
-    "coverage combine python27.coverage python35.coverage"
+  q.nfcall(rimraf, ".coverage").then(
+    -> toolbox.virtualenv(
+      "coverage combine python27.coverage python35.coverage"
+      )
   ).then -> toolbox.virtualenv(
     "coverage report -m"
   )

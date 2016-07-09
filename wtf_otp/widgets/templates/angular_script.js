@@ -10,8 +10,8 @@
             v.push(m[Math.floor(Math.random() * 32)]);
           }
           scope.{{ script_args.ng_model }} = v.join("");
-          {% if qrcode -%}
-            scope.qrcode = {'url': "{{ qrcode }}?secret=" + v};
+          {% if qrcode.url -%}
+            scope.qrcode = {'url': "{{ qrcode.url }}?secret=" + v};
           {%- endif %}
         };
       }

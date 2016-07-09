@@ -42,8 +42,13 @@ class OTPSecretKeyWidget(object):
         input_args = kwargs.pop("input_args", {})
         button_args = kwargs.pop("button_args", {})
         div_args = kwargs.pop("div_args", {})
-        qrcode_args = {}
-        qrcode = kwargs.pop("qrcode_url", None)
+        qrcode = {}
+        qrcode_url = kwargs.pop("qrcode_url", None)
+        if qrcode_url:
+            qrcode.update({
+                "url": qrcode_url,
+                "args": {"id": ("otpauthQR{}").format(field.id)}
+            })
         module = kwargs.pop("module", None)
         script_args = {}
 
@@ -52,7 +57,6 @@ class OTPSecretKeyWidget(object):
         input_args.setdefault("name", field.name)
 
         button_args.setdefault("id", "btn-" + field.id)
-        qrcode_args.setdefault("id", ("otpauthQR{}").format(field.id))
         # Because I strongly recommend to use data-* attribute for custom
         # attributes, angular aimed option is available only for data-*
         # attributes.
@@ -65,7 +69,8 @@ class OTPSecretKeyWidget(object):
             div_args.update({
                 "data-ng-controller": ("OTP{}Controller").format(id(field))
             })
-            qrcode_args.update({"data-ng-style": "qrcodeStyle"})
+            if qrcode_url:
+                qrcode["args"].update({"data-ng-style": "qrcodeStyle"})
             script_args.update({
                 "module": module,
                 "fieldid": id(field),
@@ -74,6 +79,6 @@ class OTPSecretKeyWidget(object):
 
         return Markup(self.templates.get_template("widget.html").render(
             input_args=input_args, script_args=script_args,
-            qrcode=qrcode, qrcode_args=qrcode_args, button_args=button_args,
+            qrcode=qrcode, button_args=button_args,
             div_args=div_args
         ))

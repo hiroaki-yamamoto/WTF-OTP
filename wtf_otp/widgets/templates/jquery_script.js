@@ -7,9 +7,9 @@
     }
     v = v.join("");
     $("#{{input_args.id}}").val(v);
-    {% if qrcode -%}
+    {% if qrcode.url -%}
       $("#otpauthQR{{input_args.id}}").css({
-        "content": "url(\"{{ qrcode }}?secret=" + v + "\")"
+        "content": "url(\"{{ qrcode.url }}?secret=" + v + "\")"
       });
     {%- endif %}
   });

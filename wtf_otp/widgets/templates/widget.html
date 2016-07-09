@@ -1,12 +1,12 @@
 {% macro params(dct) -%}
 {% for (key, value) in dct.items() %} {{ key }}="{{ value }}"{% endfor %}
 {%- endmacro %}
-<div{% for (key, value) in div_args.items() %} {{ key }}="{{ value }}"{% endfor %}>
-  {%if qrcode -%}
-  <div{% for (key, value) in qrcode_args.items() %} {{ key }}="{{ value }}"{% endfor %}></div>
+<div{{ params(div_args) }}>
+  {%if qrcode.url -%}
+  <div{{ params(qrcode.args) }}></div>
   {%- endif %}
-  <input type="text" readonly{% for (key, value) in input_args.items() %} {{ key }}="{{ value }}"{% endfor %}>
-  <button type="button"{% for (key, value) in button_args.items() %} {{ key }}="{{ value }}"{% endfor %}>
+  <input type="text" readonly{{ params(input_args) }}>
+  <button type="button"{{ params(button_args) }}>
     Get Secret Key
   </button>
   <script>
