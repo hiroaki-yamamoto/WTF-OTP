@@ -1,0 +1,19 @@
+{% macro params(dct) -%}
+{% for (key, value) in dct.items() %} {{ key }}="{{ value }}"{% endfor %}
+{%- endmacro %}
+<div{% for (key, value) in div_args.items() %} {{ key }}="{{ value }}"{% endfor %}>
+  {%if qrcode -%}
+  <div{% for (key, value) in qrcode_args.items() %} {{ key }}="{{ value }}"{% endfor %}></div>
+  {%- endif %}
+  <input type="text" readonly{% for (key, value) in input_args.items() %} {{ key }}="{{ value }}"{% endfor %}>
+  <button type="button"{% for (key, value) in button_args.items() %} {{ key }}="{{ value }}"{% endfor %}>
+    Get Secret Key
+  </button>
+  <script>
+  {% if "data-ng-model" in input_args -%}
+  {% include("angular_script.js") -%}
+  {%- else -%}
+  {% include("jquery_script.js") -%}
+  {%- endif %}
+  </script>
+</div>
