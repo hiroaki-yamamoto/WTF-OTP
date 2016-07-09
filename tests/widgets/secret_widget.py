@@ -71,7 +71,6 @@ class OTPWidgetAngularInitTest(TestCase):
         get_template.return_value.render.assert_called_once_with(
             div_args={
                 "class": "form-group",
-                "data-ng-app": ("OTP{}Module").format(id(self.field)),
                 "data-ng-controller": (
                     "OTP{}Controller"
                 ).format(id(self.field))
@@ -162,7 +161,6 @@ class OTPWidgetAngularQRCodeTest(TestCase):
         get_template.return_value.render.assert_called_once_with(
             div_args={
                 "class": "form-group",
-                "data-ng-app": ("OTP{}Module").format(id(self.field)),
                 "data-ng-controller": (
                     "OTP{}Controller"
                 ).format(id(self.field))

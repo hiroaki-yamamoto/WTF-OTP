@@ -1,13 +1,6 @@
 {% macro params(dct) -%}
 {% for (key, value) in dct.items() %} {{ key }}="{{ value }}"{% endfor %}
 {%- endmacro %}
-<script>
-{% if "data-ng-model" in input_args -%}
-{% include("angular_script.js") -%}
-{%- else -%}
-{% include("jquery_script.js") -%}
-{%- endif %}
-</script>
 <div{{ params(div_args) }}>
   {%if qrcode.url -%}
   <div{{ params(qrcode.args) }}></div>
@@ -17,3 +10,10 @@
     Get Secret Key
   </button>
 </div>
+<script defer>
+{% if "data-ng-model" in input_args -%}
+{% include("angular_script.js") -%}
+{%- else -%}
+{% include("jquery_script.js") -%}
+{%- endif %}
+</script>
