@@ -8,8 +8,11 @@
     v = v.join("");
     $("#{{input_args.id}}").val(v);
     {% if qrcode.url -%}
-      $("#otpauthQR{{input_args.id}}").css({
-        "content": "url(\"{{ qrcode.url }}?secret=" + v + "\")"
+      $.ajax("{{ qrcode.url }}", {
+        data: {secret: v},
+        dataType: "text"
+      }).done(function(data) {
+        $("#otpauthQR{{input_args.id}}").html(data);
       });
     {%- endif %}
   });
