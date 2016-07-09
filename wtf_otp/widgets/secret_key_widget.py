@@ -3,9 +3,7 @@
 
 """OTP Widgets."""
 from wtforms.widgets import html_params, HTMLString
-from jinja2 import Markup
-
-from .templates import jquery_template, angular_template
+from jinja2 import Environment, PackageLoader,  Markup
 
 
 class OTPSecretKeyWidget(object):
@@ -16,6 +14,12 @@ class OTPSecretKeyWidget(object):
     Clicking the "Generate" button, a new secret key is generated thru
     browser-side generator.
     """
+
+    def __init__(self):
+        """Initialize the widget."""
+        self.templates = Environment(
+            loader=PackageLoader("wtf_otp.widgets")
+        )
 
     def __call__(self, field, **kwargs):
         """
@@ -73,15 +77,17 @@ class OTPSecretKeyWidget(object):
         div_widget = ("<div {}>").format(
             html_params(**div_args)
         ) if div_args else "<div>"
-        script_widget = HTMLString(
-            angular_template.render(
-                module=module, fieldid=id(field),
-                ng_model=input_args["data-ng-model"],
-                qrcode_url=qrcode
-            ) if "data-ng-model" in input_args else jquery_template.render(
-                btnid=button_args["id"], inputid=input_args["id"],
-                qrcode_url=qrcode
-            )
+        script_widget = self.templates.get_template(
+            "angular_script.html"
+        ).render(
+            module=module, fieldid=id(field),
+            ng_model=input_args["data-ng-model"],
+            qrcode_url=qrcode
+        ) if "data-ng-model" in input_args else self.templates.get_template(
+            "jquery_script.html"
+        ).render(
+            btnid=button_args["id"], inputid=input_args["id"],
+            qrcode_url=qrcode
         )
 
         qrcode_tag = HTMLString(

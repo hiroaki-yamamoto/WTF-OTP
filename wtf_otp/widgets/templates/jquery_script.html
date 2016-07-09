@@ -1,0 +1,18 @@
+<script>
+(function(){
+  "use strict";
+  $("#{{btnid}}").on("click", function() {
+    var m="ABCDEFGHIJKLMNOPQRSTUVWXYZ234567", v = [], i;
+    for(i=0; i<16; i++) {
+      v.push(m[Math.floor(Math.random() * 32)]);
+    }
+    v = v.join("");
+    $("#{{inputid}}").val(v);
+    {% if qrcode_url %}
+      $("#otpauthQR{{inputid}}").css({
+        "content": "url(\"{{qrcode_url}}?secret=" + v + "\")"
+      });
+    {% endif %}
+  });
+})()
+</script>

@@ -7,7 +7,6 @@ from unittest import TestCase
 from jinja2 import Markup
 from wtforms.widgets import HTMLString, html_params
 from wtf_otp import OTPSecretKeyWidget
-from wtf_otp.widgets.templates import jquery_template, angular_template
 
 
 class OTPTestField(object):
@@ -36,7 +35,7 @@ class OTPWidgetNormalInitTest(TestCase):
             html_params(**{"class": "form-group"}),
             html_params(id=self.field.id, name=self.field.name),
             html_params(id="btn-" + self.field.id),
-            jquery_template.render(
+            self.widget.templates.get_template("jquery_script.html").render(
                 btnid=("btn-{}").format(self.field.id), inputid=self.field.id
             )
         ))
@@ -74,7 +73,7 @@ class OTPWidgetAngularInitTest(TestCase):
             html_params(id="btn-" + self.field.id, **{
                 "data-ng-click": ("click{}()").format(id(self.field))
             }),
-            angular_template.render(
+            self.widget.templates.get_template("angular_script.html").render(
                 module="testModule",
                 fieldid=id(self.field), inputid=self.field.id,
                 ng_model=self.field.render_kw["data-ng-model"]
@@ -109,7 +108,7 @@ class OTPWidgetJQueryQRCodeTest(TestCase):
             html_params(id=("otpauthQR{}").format(self.field.id)),
             html_params(id=self.field.id, name=self.field.name),
             html_params(id="btn-" + self.field.id),
-            jquery_template.render(
+            self.widget.templates.get_template("jquery_script.html").render(
                 btnid=("btn-{}").format(self.field.id), inputid=self.field.id,
                 qrcode_url="/qrcode"
             )
@@ -160,7 +159,7 @@ class OTPWidgetAngularQRCodeTest(TestCase):
             html_params(id="btn-" + self.field.id, **{
                 "data-ng-click": ("click{}()").format(id(self.field))
             }),
-            angular_template.render(
+            self.widget.templates.get_template("angular_script.html").render(
                 module="testModule", fieldid=id(self.field),
                 inputid=self.field.id, qrcode_url="/qrcode",
                 ng_model=self.field.render_kw["data-ng-model"],
