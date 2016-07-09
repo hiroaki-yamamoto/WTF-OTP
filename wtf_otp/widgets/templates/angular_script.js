@@ -1,6 +1,6 @@
 (function() {
   "use strict";
-  angular.module("{{ script_args.module }}").controller(
+  angular.module("OTP{{script_args.fieldid}}Module", []).controller(
     "OTP{{script_args.fieldid}}Controller", [
       "$scope", "$element",
       function(scope, element) {

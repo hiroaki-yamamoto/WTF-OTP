@@ -67,6 +67,7 @@ class OTPSecretKeyWidget(object):
                 )
             button_args["data-ng-click"] = ("click{}()").format(id(field))
             div_args.update({
+                "data-ng-app": ("OTP{}Module").format(id(field)),
                 "data-ng-controller": ("OTP{}Controller").format(id(field))
             })
             if qrcode_url:
