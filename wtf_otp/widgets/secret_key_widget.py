@@ -3,6 +3,7 @@
 
 """OTP Widgets."""
 from jinja2 import Environment, PackageLoader,  Markup
+from wtforms.widgets import html_params
 
 
 class OTPSecretKeyWidget(object):
@@ -19,6 +20,7 @@ class OTPSecretKeyWidget(object):
         self.templates = Environment(
             loader=PackageLoader("wtf_otp.widgets")
         )
+        self.templates.globals["attrs"] = html_params
 
     def __call__(self, field, **kwargs):
         """
@@ -67,14 +69,13 @@ class OTPSecretKeyWidget(object):
                 )
             button_args["data-ng-click"] = ("click{}()").format(id(field))
             div_args.update({
-                "data-ng-controller": ("OTP{}Controller").format(id(field))
+                ("data-otp-field{}").format(id(field)): True,
+                "data-ng-model": input_args.pop("data-ng-model")
             })
-            if qrcode_url:
-                qrcode["args"].update({"data-ng-style": "qrcodeStyle"})
+            input_args["data-ng-model"] = "ngModel"
             script_args.update({
                 "module": module,
-                "fieldid": id(field),
-                "ng_model": input_args["data-ng-model"]
+                "fieldid": id(field)
             })
 
         return Markup(self.templates.get_template("widget.html").render(

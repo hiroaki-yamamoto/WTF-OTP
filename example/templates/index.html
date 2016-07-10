@@ -7,10 +7,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
   <script src="{{ url_for('.static', filename='angular_script.js') }}" defer></script>
 </head>
-<body data-ng-app="OTPApp">
+<body data-ng-app="OTPApp" data-ng-controller="OTPController">
   <section>
     <header>
-      <h1>jQuery Version</h1>
+      <h1>Secret Key Generation</h1>
     </header>
     <form action="/" method="post" name="OTPForm">
       {% for field in form -%}
@@ -19,6 +19,10 @@
         {%- endif %}
       {%- endfor %}
     </form>
+    <div>
+      <h2>Result</h2>
+      {{"{{ model }}"}}
+    </div>
   </section>
 </body>
 </html>

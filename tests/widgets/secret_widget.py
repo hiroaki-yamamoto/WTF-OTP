@@ -66,14 +66,15 @@ class OTPWidgetAngularInitTest(TestCase):
             div_args={"class": "form-group"},
             **self.field.render_kw
         )
+        ngmodel = self.field.render_kw.pop("data-ng-model")
+        self.field.render_kw["data-ng-model"] = "ngModel"
         get_template = self.widget.templates.get_template
         get_template.assert_called_once_with("widget.html")
         get_template.return_value.render.assert_called_once_with(
             div_args={
                 "class": "form-group",
-                "data-ng-controller": (
-                    "OTP{}Controller"
-                ).format(id(self.field))
+                ("data-otp-field{}").format(id(self.field)): True,
+                "data-ng-model": ngmodel
             },
             input_args=dict(
                 id=self.field.id, name=self.field.name,
@@ -85,8 +86,7 @@ class OTPWidgetAngularInitTest(TestCase):
             },
             script_args={
                 "module": "testModule",
-                "fieldid": id(self.field),
-                "ng_model": self.field.render_kw["data-ng-model"]
+                "fieldid": id(self.field)
             },
             qrcode={}
         )
@@ -144,7 +144,7 @@ class OTPWidgetAngularQRCodeTest(TestCase):
         """Setup."""
         self.field = OTPTestField()
         self.field.render_kw = {
-            "data-ng-model": "test.data"
+            "data-ng-model": "model.test"
         }
         self.widget = OTPSecretKeyWidget()
         self.widget.templates.get_template = MagicMock()
@@ -156,14 +156,15 @@ class OTPWidgetAngularQRCodeTest(TestCase):
             module="testModule", qrcode_url="/qrcode",
             **self.field.render_kw
         )
+        ngmodel = self.field.render_kw.pop("data-ng-model")
+        self.field.render_kw["data-ng-model"] = "ngModel"
         get_template = self.widget.templates.get_template
         get_template.assert_called_once_with("widget.html")
         get_template.return_value.render.assert_called_once_with(
             div_args={
                 "class": "form-group",
-                "data-ng-controller": (
-                    "OTP{}Controller"
-                ).format(id(self.field))
+                ("data-otp-field{}").format(id(self.field)): True,
+                "data-ng-model": ngmodel
             },
             input_args=dict(
                 id=self.field.id, name=self.field.name,
@@ -175,14 +176,12 @@ class OTPWidgetAngularQRCodeTest(TestCase):
             },
             script_args={
                 "module": "testModule",
-                "fieldid": id(self.field),
-                "ng_model": self.field.render_kw["data-ng-model"]
+                "fieldid": id(self.field)
             },
             qrcode={
                 "url": "/qrcode",
                 "args": {
-                    "id": ("otpauthQR{}").format(self.field.id),
-                    "data-ng-style": "qrcodeStyle"
+                    "id": ("otpauthQR{}").format(self.field.id)
                 }
             }
         )

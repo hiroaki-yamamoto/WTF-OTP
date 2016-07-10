@@ -19,11 +19,11 @@ class SecretKeyTestForm(Form):
     jquery_secret_noqrcode = OTPSecretKeyField()
     angular_secret = OTPSecretKeyField(render_kw={
         "qrcode_url": "/qrcode",
-        "data-ng-model": "mdoel.test",
+        "data-ng-model": "model.test",
         "module": "OTPApp"
     })
     angular_secret_noqrcode = OTPSecretKeyField(render_kw={
-        "data-ng-model": "mdoel.test_noqr",
+        "data-ng-model": "model.test_noqr",
         "module": "OTPApp"
     })
 

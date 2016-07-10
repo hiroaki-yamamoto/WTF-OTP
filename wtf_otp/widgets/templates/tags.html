@@ -1,0 +1,7 @@
+{%if qrcode.url -%}
+<div{% if qrcode.args %} {{ attrs(**qrcode.args) }}{% endif %}></div>
+{%- endif %}
+<input type="text" readonly{% if input_args %} {{ attrs(**input_args) }}{% endif %}>
+<button type="button"{% if button_args %}{{ attrs(**button_args) }}{% endif %}>
+  Get Secret Key
+</button>
