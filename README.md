@@ -1,6 +1,14 @@
 # One-Time Password Field for WT-Forms
 
+[![Build Status]][Build Status Link]
+[![Coverage Status]][Coverage Status Link]
+
 Note: This is under heavily development.
+
+[Build Status]: https://travis-ci.org/hiroaki-yamamoto/WTF-OTP.svg?branch=master
+[Build Status Link]: https://travis-ci.org/hiroaki-yamamoto/WTF-OTP
+[Coverage Status]: https://coveralls.io/repos/github/hiroaki-yamamoto/WTF-OTP/badge.svg?branch=master
+[Coverage Status Link]: https://coveralls.io/github/hiroaki-yamamoto/WTF-OTP?branch=master
 
 ## MIT License
 The MIT License (MIT)
