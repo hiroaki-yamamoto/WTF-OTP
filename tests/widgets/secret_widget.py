@@ -62,8 +62,7 @@ class OTPWidgetAngularInitTest(TestCase):
     def test_call(self):
         """The widget should generate AngularJS based view."""
         self.widget(
-            self.field, module="testModule",
-            div_args={"class": "form-group"},
+            self.field, div_args={"class": "form-group"},
             **self.field.render_kw
         )
         ngmodel = self.field.render_kw.pop("data-ng-model")
@@ -85,23 +84,9 @@ class OTPWidgetAngularInitTest(TestCase):
                 "data-ng-click": ("click{}()").format(id(self.field))
             },
             script_args={
-                "module": "testModule",
                 "fieldid": id(self.field)
             },
             qrcode={}
-        )
-
-    def test_module_exception(self):
-        """Should show ValueError to tell module name is missing."""
-        with self.assertRaises(ValueError) as err:
-            self.widget(
-                self.field,
-                div_args={"class": "form-group"},
-                **self.field.render_kw
-            )
-        self.assertEqual(
-            str(err.exception),
-            "AngularJS module name is needed to use AngularJS."
         )
 
 
@@ -153,8 +138,7 @@ class OTPWidgetAngularQRCodeTest(TestCase):
         """The widget should generate angularjs based widget with qrcode."""
         self.widget(
             self.field, div_args={"class": "form-group"},
-            module="testModule", qrcode_url="/qrcode",
-            **self.field.render_kw
+            qrcode_url="/qrcode", **self.field.render_kw
         )
         ngmodel = self.field.render_kw.pop("data-ng-model")
         self.field.render_kw["data-ng-model"] = "ngModel"
@@ -175,7 +159,6 @@ class OTPWidgetAngularQRCodeTest(TestCase):
                 "data-ng-click": ("click{}()").format(id(self.field))
             },
             script_args={
-                "module": "testModule",
                 "fieldid": id(self.field)
             },
             qrcode={

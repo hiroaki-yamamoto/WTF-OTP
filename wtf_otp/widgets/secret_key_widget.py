@@ -37,7 +37,6 @@ class OTPSecretKeyWidget(object):
             button_args: Any arguments to be applied to button only.
             div_args: Any argument that to applied to div wrap.
                 i.e. inputs are wrapped with div tags.
-            module: The module name to be attached.
             qrcode_url: URL to generate QR Code.
                 CAUTION: DO NOT specify external url for security reason.
         """
@@ -51,7 +50,6 @@ class OTPSecretKeyWidget(object):
                 "url": qrcode_url,
                 "args": {"id": ("otpauthQR{}").format(field.id)}
             })
-        module = kwargs.pop("module", None)
         script_args = {}
 
         input_args.update(kwargs)
@@ -63,20 +61,13 @@ class OTPSecretKeyWidget(object):
         # attributes, angular aimed option is available only for data-*
         # attributes.
         if "data-ng-model" in input_args:
-            if not module:
-                raise ValueError(
-                    "AngularJS module name is needed to use AngularJS."
-                )
             button_args["data-ng-click"] = ("click{}()").format(id(field))
             div_args.update({
                 ("data-otp-field{}").format(id(field)): True,
                 "data-ng-model": input_args.pop("data-ng-model")
             })
             input_args["data-ng-model"] = "ngModel"
-            script_args.update({
-                "module": module,
-                "fieldid": id(field)
-            })
+            script_args.update({"fieldid": id(field)})
 
         return Markup(self.templates.get_template("widget.html").render(
             input_args=input_args, script_args=script_args,

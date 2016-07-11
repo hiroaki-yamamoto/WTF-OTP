@@ -3,10 +3,6 @@
 {%- endmacro %}
 (function() {
   "use strict";
-  // var target = document.querySelector(
-  //   "[data-otp-field{{script_args.fieldid}}]"
-  // );
-  // "{{ script_args.module }}"
   angular.module("OTP{{script_args.fieldid}}Directive", []).directive(
     "otpField{{script_args.fieldid}}", [
       function() {
@@ -56,8 +52,9 @@
         var element = angular.element(doc).find(
           "[data-otp-field{{script_args.fieldid}}]"
         ), scope = element.scope();
-        compile(element)(scope);
-        scope.$digest();
+        scope.$apply(function () {
+          compile(element)(scope);
+        });
       }
     ]);
   }, false);
