@@ -4,9 +4,11 @@
 """OTP Secret Ket Widget Tests."""
 
 from unittest import TestCase
-from wtforms.widgets import HTMLString, html_params
+try:
+    from unittest.mock import MagicMock
+except ImportError:
+    from mock import MagicMock
 from wtf_otp import OTPSecretKeyWidget
-from wtf_otp.widgets.templates import jquery_template, angular_template
 
 
 class OTPTestField(object):
@@ -26,24 +28,50 @@ class OTPWidgetNormalInitTest(TestCase):
         """Setup."""
         self.field = OTPTestField()
         self.widget = OTPSecretKeyWidget()
-        self.expected = HTMLString(
-            "<div {}>"
-            "<input type=\"text\" readonly {}>"
-            "<button type=\"button\" {}>Get Secret Key</button>{}"
-            "</div>"
-        ).format(
-            html_params(**{"class": "form-group"}),
-            html_params(id=self.field.id, name=self.field.name),
-            html_params(id="btn-" + self.field.id),
-            jquery_template.render(
-                btnid=("btn-{}").format(self.field.id), inputid=self.field.id
-            )
-        )
+        self.widget.templates.get_template = MagicMock()
 
     def test_call(self):
         """The widget should generate jquery based widget."""
-        result = self.widget(self.field, div_args={"class": "form-group"})
-        self.assertEqual(result, self.expected)
+        self.widget(self.field, div_args={"class": "form-group"})
+        get_template = self.widget.templates.get_template
+        get_template.assert_called_once_with("widget.html")
+        get_template.return_value.render.assert_called_once_with(
+            div_args={"class": "form-group"},
+            input_args=dict(
+                id=self.field.id, name=self.field.name,
+                **self.field.render_kw
+            ),
+            button_args={"id": "btn-" + self.field.id},
+            qrcode={},
+            script_args={}
+        )
+
+
+class OTPWidgetContainsDataTest(TestCase):
+    """Normal initlaization, but it contains data."""
+
+    def setUp(self):
+        """Setup."""
+        self.field = OTPTestField()
+        self.field.data = "test"
+        self.widget = OTPSecretKeyWidget()
+        self.widget.templates.get_template = MagicMock()
+
+    def test_call(self):
+        """The widget should generate jquery based widget with the value."""
+        self.widget(self.field, div_args={"class": "form-group"})
+        get_template = self.widget.templates.get_template
+        get_template.assert_called_once_with("widget.html")
+        get_template.return_value.render.assert_called_once_with(
+            div_args={"class": "form-group"},
+            input_args=dict(
+                id=self.field.id, name=self.field.name,
+                value=self.field.data, **self.field.render_kw
+            ),
+            button_args={"id": "btn-" + self.field.id},
+            qrcode={},
+            script_args={}
+        )
 
 
 class OTPWidgetAngularInitTest(TestCase):
@@ -54,38 +82,80 @@ class OTPWidgetAngularInitTest(TestCase):
         self.field = OTPTestField()
         self.field.render_kw = {"data-ng-model": "test.data"}
         self.widget = OTPSecretKeyWidget()
-        self.expected = HTMLString(
-            "<div {}>"
-            "<input type=\"text\" readonly {}>"
-            "<button type=\"button\" {}>Get Secret Key</button>{}"
-            "</div>"
-        ).format(
-            html_params(**{
-                "class": "form-group",
-                "data-ng-controller": ("OTP{}Controller").format(
-                    id(self.field)
-                )
-            }),
-            html_params(
-                id=self.field.id, name=self.field.name,
-                **self.field.render_kw
-            ),
-            html_params(id="btn-" + self.field.id, **{
-                "data-ng-click": ("click{}()").format(id(self.field))
-            }),
-            angular_template.render(
-                fieldid=id(self.field), inputid=self.field.id,
-                ng_model=self.field.render_kw["data-ng-model"]
-            )
-        )
+        self.widget.templates.get_template = MagicMock()
 
     def test_call(self):
         """The widget should generate AngularJS based view."""
-        result = self.widget(
+        self.widget(
             self.field, div_args={"class": "form-group"},
             **self.field.render_kw
         )
-        self.assertEqual(result, self.expected)
+        ngmodel = self.field.render_kw.pop("data-ng-model")
+        self.field.render_kw["data-ng-model"] = "ngModel"
+        get_template = self.widget.templates.get_template
+        get_template.assert_called_once_with("widget.html")
+        get_template.return_value.render.assert_called_once_with(
+            div_args={
+                "class": "form-group",
+                ("data-otp-field{}").format(id(self.field)): True,
+                "data-ng-model": ngmodel
+            },
+            input_args=dict(
+                id=self.field.id, name=self.field.name,
+                **self.field.render_kw
+            ),
+            button_args={
+                "id": "btn-" + self.field.id,
+                "data-ng-click": ("click{}()").format(id(self.field))
+            },
+            script_args={
+                "fieldid": id(self.field)
+            },
+            qrcode={}
+        )
+
+
+class OTPAngularWidgetContainsDataTest(TestCase):
+    """Normal initlaization, but it contains data."""
+
+    def setUp(self):
+        """Setup."""
+        self.field = OTPTestField()
+        self.field.render_kw = {"data-ng-model": "test.data"}
+        self.field.data = "test"
+        self.widget = OTPSecretKeyWidget()
+        self.widget.templates.get_template = MagicMock()
+
+    def test_call(self):
+        """The widget should generate angular based widget with the value."""
+        self.widget(
+            self.field, div_args={"class": "form-group"},
+            **self.field.render_kw
+        )
+        ngmodel = self.field.render_kw.pop("data-ng-model")
+        self.field.render_kw["data-ng-model"] = "ngModel"
+        get_template = self.widget.templates.get_template
+        get_template.assert_called_once_with("widget.html")
+        get_template.return_value.render.assert_called_once_with(
+            div_args={
+                "class": "form-group",
+                ("data-otp-field{}").format(id(self.field)): True,
+                "data-ng-model": ngmodel
+            },
+            input_args=dict(
+                id=self.field.id, name=self.field.name,
+                **self.field.render_kw
+            ),
+            button_args={
+                "id": "btn-" + self.field.id,
+                "data-ng-click": ("click{}()").format(id(self.field))
+            },
+            script_args={
+                "fieldid": id(self.field),
+                "data": self.field.data
+            },
+            qrcode={}
+        )
 
 
 class OTPWidgetJQueryQRCodeTest(TestCase):
@@ -95,30 +165,29 @@ class OTPWidgetJQueryQRCodeTest(TestCase):
         """Setup."""
         self.field = OTPTestField()
         self.widget = OTPSecretKeyWidget()
-        self.expected = HTMLString(
-            "<div {}>"
-            "<img id=\"otpauthQR{}\">"
-            "<input type=\"text\" readonly {}>"
-            "<button type=\"button\" {}>Get Secret Key</button>{}"
-            "</div>"
-        ).format(
-            html_params(**{"class": "form-group"}),
-            self.field.id,
-            html_params(id=self.field.id, name=self.field.name),
-            html_params(id="btn-" + self.field.id),
-            jquery_template.render(
-                btnid=("btn-{}").format(self.field.id), inputid=self.field.id,
-                qrcode_url="/qrcode"
-            )
-        )
+        self.widget.templates.get_template = MagicMock()
 
     def test_call(self):
         """The widget should generate jquery based widget with qrcode."""
-        result = self.widget(
+        self.widget(
             self.field, div_args={"class": "form-group"},
             qrcode_url="/qrcode"
         )
-        self.assertEqual(result, self.expected)
+        get_template = self.widget.templates.get_template
+        get_template.assert_called_once_with("widget.html")
+        get_template.return_value.render.assert_called_once_with(
+            div_args={"class": "form-group"},
+            input_args=dict(
+                id=self.field.id, name=self.field.name,
+                **self.field.render_kw
+            ),
+            button_args={"id": "btn-" + self.field.id},
+            qrcode={
+                "url": "/qrcode",
+                "args": {"id": ("otpauthQR{}").format(self.field.id)}
+            },
+            script_args={}
+        )
 
 
 class OTPWidgetAngularQRCodeTest(TestCase):
@@ -127,40 +196,43 @@ class OTPWidgetAngularQRCodeTest(TestCase):
     def setUp(self):
         """Setup."""
         self.field = OTPTestField()
-        self.field.render_kw = {"data-ng-model": "test.data"}
+        self.field.render_kw = {
+            "data-ng-model": "model.test"
+        }
         self.widget = OTPSecretKeyWidget()
-        self.expected = HTMLString(
-            "<div {}>"
-            "<img id=\"otpauthQR{}\">"
-            "<input type=\"text\" readonly {}>"
-            "<button type=\"button\" {}>Get Secret Key</button>{}"
-            "</div>"
-        ).format(
-            html_params(**{
-                "class": "form-group",
-                "data-ng-controller": ("OTP{}Controller").format(
-                    id(self.field)
-                )
-            }),
-            self.field.id,
-            html_params(
-                id=self.field.id, name=self.field.name,
-                **self.field.render_kw
-            ),
-            html_params(id="btn-" + self.field.id, **{
-                "data-ng-click": ("click{}()").format(id(self.field))
-            }),
-            angular_template.render(
-                fieldid=id(self.field), inputid=self.field.id,
-                ng_model=self.field.render_kw["data-ng-model"],
-                qrcode_url="/qrcode"
-            )
-        )
+        self.widget.templates.get_template = MagicMock()
 
     def test_call(self):
         """The widget should generate angularjs based widget with qrcode."""
-        result = self.widget(
+        self.widget(
             self.field, div_args={"class": "form-group"},
             qrcode_url="/qrcode", **self.field.render_kw
         )
-        self.assertEqual(result, self.expected)
+        ngmodel = self.field.render_kw.pop("data-ng-model")
+        self.field.render_kw["data-ng-model"] = "ngModel"
+        get_template = self.widget.templates.get_template
+        get_template.assert_called_once_with("widget.html")
+        get_template.return_value.render.assert_called_once_with(
+            div_args={
+                "class": "form-group",
+                ("data-otp-field{}").format(id(self.field)): True,
+                "data-ng-model": ngmodel
+            },
+            input_args=dict(
+                id=self.field.id, name=self.field.name,
+                **self.field.render_kw
+            ),
+            button_args={
+                "id": "btn-" + self.field.id,
+                "data-ng-click": ("click{}()").format(id(self.field))
+            },
+            script_args={
+                "fieldid": id(self.field)
+            },
+            qrcode={
+                "url": "/qrcode",
+                "args": {
+                    "id": ("otpauthQR{}").format(self.field.id)
+                }
+            }
+        )

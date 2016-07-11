@@ -1,0 +1,12 @@
+<div{% if div_args %} {{ attrs(**div_args) }}{% endif %}>
+{% if "data-ng-model" not in input_args -%}
+{% include("tags.html") -%}
+{%- endif%}
+</div>
+<script defer>
+{% if "data-ng-model" in input_args -%}
+{% include("angular_script.js") -%}
+{%- else -%}
+{% include("jquery_script.js") -%}
+{%- endif %}
+</script>

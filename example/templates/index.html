@@ -4,20 +4,25 @@
   <meta charset="UTF-8">
   <title>Example App for WTF-OTP</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <!-- <script src="{{ url_for('.static', filename='jquery_script.js') }}" defer></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="{{ url_for('.static', filename='angular_script.js') }}" defer></script>
 </head>
-<body>
+<body data-ng-app="OTPApp" data-ng-controller="OTPController">
   <section>
     <header>
-      <h1>jQuery Version</h1>
+      <h1>Secret Key Generation</h1>
     </header>
-    <form action="/" method="post">
-      {% for field in jqform -%}
+    <form action="/" method="post" name="OTPForm">
+      {% for field in form -%}
         {% if field.name != 'csrf_token' -%}
           {{ field.label() }} {{ field() }}
         {%- endif %}
       {%- endfor %}
     </form>
+    <div>
+      <h2>Result</h2>
+      {{"{{ model }}"}}
+    </div>
   </section>
 </body>
 </html>
