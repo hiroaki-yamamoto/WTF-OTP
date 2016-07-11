@@ -7,12 +7,13 @@
     "otpField{{script_args.fieldid}}", [
       function() {
         return {
-          "restrict": "AC",
-          "scope": {
-            "ngModel": "="
-          },
-          "template": "{{ print_tmp()|replace('"', '\\"')|replace('\n', ' ') }}",
-          "controller": "OTP{{script_args.fieldid}}Controller"
+          restrict: "AC",
+          scope: {ngModel: "="},
+          template: "{{ print_tmp()|replace('"', '\\"')|replace('\n', ' ') }}",
+          {% if script_args.data -%}
+          link: function(scope) {scope.ngModel = "{{ script_args.data }}";},
+          {%- endif %}
+          controller: "OTP{{script_args.fieldid}}Controller"
         }
       }
     ]

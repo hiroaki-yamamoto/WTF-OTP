@@ -5,7 +5,7 @@
 
 from io import BytesIO
 
-from wtforms.fields import Field
+from wtforms.fields import StringField
 from pyotp import random_base32
 from pyotp.utils import build_uri as build_otp_uri
 from qrcode import make as generate_qrcode
@@ -14,7 +14,7 @@ from qrcode.image.svg import SvgPathImage as svg
 from ..widgets import OTPSecretKeyWidget
 
 
-class OTPSecretKeyField(Field):
+class OTPSecretKeyField(StringField):
     """
     OTPSecretKeyField.
 
@@ -46,7 +46,7 @@ class OTPSecretKeyField(Field):
         Google Authenticator or Authy.
 
         Parameters:
-            **kwargs: Any keyword args to be passed to build_uri.
+            **kwargs: Any keyword args to be passed to pyotp.utils.build_uri.
         """
         result = bytes()
         with BytesIO() as stream:

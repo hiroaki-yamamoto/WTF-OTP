@@ -53,6 +53,8 @@ class OTPSecretKeyWidget(object):
         script_args = {}
 
         input_args.update(kwargs)
+        if getattr(field, "data", None):
+            input_args["value"] = field.data
         input_args.setdefault("id", field.id)
         input_args.setdefault("name", field.name)
 
@@ -68,6 +70,9 @@ class OTPSecretKeyWidget(object):
             })
             input_args["data-ng-model"] = "ngModel"
             script_args.update({"fieldid": id(field)})
+            defaultvalue = input_args.pop("value", None)
+            if defaultvalue:
+                script_args["data"] = defaultvalue
 
         return Markup(self.templates.get_template("widget.html").render(
             input_args=input_args, script_args=script_args,

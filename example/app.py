@@ -13,24 +13,60 @@ app.config["SECRET_KEY"] = (
 
 
 class SecretKeyTestForm(Form):
-    jquery_secret = OTPSecretKeyField(render_kw={
-        "qrcode_url": "/qrcode"
-    })
-    jquery_secret_noqrcode = OTPSecretKeyField()
-    angular_secret = OTPSecretKeyField(render_kw={
-        "qrcode_url": "/qrcode",
-        "data-ng-model": "model.test",
-        "module": "OTPApp"
-    })
-    angular_secret_noqrcode = OTPSecretKeyField(render_kw={
-        "data-ng-model": "model.test_noqr",
-        "module": "OTPApp"
-    })
+    jquery_secret = OTPSecretKeyField(
+        "JQuery Secret Key with QR Code",
+        render_kw={"qrcode_url": "/qrcode"}
+    )
+    jquery_secret_noqrcode = OTPSecretKeyField(
+        "JQuery Secret Key without QR Code"
+    )
+    jquery_secret_hasdata = OTPSecretKeyField(
+        "JQuery Secret Key with QR Code and data",
+        render_kw={"qrcode_url": "/qrcode"}
+    )
+    jquery_secret_noqrcode_hasdata = OTPSecretKeyField(
+        "JQuery Secret Key without QR Code, but it has data"
+    )
+    angular_secret = OTPSecretKeyField(
+        "Angular Secret Key with QR Code",
+        render_kw={
+            "qrcode_url": "/qrcode",
+            "data-ng-model": "model.test",
+            "module": "OTPApp"
+        }
+    )
+    angular_secret_noqrcode = OTPSecretKeyField(
+        "Angular Secret Key without QR Code", render_kw={
+            "data-ng-model": "model.test_noqr",
+            "module": "OTPApp"
+        }
+    )
+    angular_secret_hasdata = OTPSecretKeyField(
+        "Angular Secret Key with QR Code and data",
+        render_kw={
+            "qrcode_url": "/qrcode",
+            "data-ng-model": "model.test_data",
+            "module": "OTPApp"
+        }
+    )
+    angular_secret_noqrcode_hasdata = OTPSecretKeyField(
+        "Angular Secret Key without QR Code, but it has data",
+        render_kw={
+            "data-ng-model": "model.test_noqr_data",
+            "module": "OTPApp"
+        }
+    )
 
 
 @app.route("/")
 def index():
     form = SecretKeyTestForm()
+    form.jquery_secret_hasdata.data = form.jquery_secret_hasdata.generate()
+    form.jquery_secret_noqrcode_hasdata.data = \
+        form.jquery_secret_noqrcode_hasdata.generate()
+    form.angular_secret_hasdata.data = form.angular_secret_hasdata.generate()
+    form.angular_secret_noqrcode_hasdata.data = \
+        form.angular_secret_noqrcode_hasdata.generate()
     return render_template("index.html", form=form)
 
 
