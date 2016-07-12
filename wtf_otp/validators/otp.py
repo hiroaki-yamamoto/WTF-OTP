@@ -3,7 +3,7 @@
 
 """OTP Check Validator."""
 
-from pyotp import TOTP
+import pyotp
 from wtforms.validators import ValidationError
 
 
@@ -33,7 +33,7 @@ class OTPCheck(object):
                 pyotp.(TOTP|HTOP).__init__(). Note that all values are able to
                 be callable functions that return the corresponding values.
         """
-        _method = method.lower()
+        _method = method.upper()
         init_args = {}
         for (key, value) in kwargs.items():
             try:
@@ -42,9 +42,9 @@ class OTPCheck(object):
                 init_args[key] = value
 
         self.call_args = call_args or {}
-        if _method not in ["totp", "hotp"]:
+        if _method not in ["TOTP", "HOTP"]:
             raise ValueError("The method should be \"totp\" or \"hotp\".")
-        self.otp = TOTP(secret, **init_args)
+        self.otp = getattr(pyotp, _method)(secret, **init_args)
 
     def __call__(self, form, field):
         """Validate the input data."""

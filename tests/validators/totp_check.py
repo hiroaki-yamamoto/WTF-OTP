@@ -16,28 +16,10 @@ from wtforms.fields import StringField
 from wtf_otp import OTPCheck
 
 
-class TOTPInitErrorTest(TestCase):
-    """OTPCheck.__init__ error check when invalid value is put."""
-
-    def test_invalid_value(self):
-        """OTPCheck.__init__ should raise ValueError."""
-        with self.assertRaises(ValueError) as e:
-            class TestForm(Form):
-                """Test Form."""
-
-                totp = StringField(validators=[
-                    OTPCheck("base32secret", method="aloha")
-                ])
-        self.assertEqual(
-            str(e.exception),
-            "The method should be \"totp\" or \"hotp\"."
-        )
-
-
 class TOTPNormalTest(TestCase):
     """Time-Based OTP Normal Situation Test."""
 
-    @patch("wtf_otp.validators.otp.TOTP")
+    @patch("pyotp.TOTP")
     def setUp(self, totp):
         """Setup."""
         self.secret = random_base32()
@@ -72,7 +54,7 @@ class TOTPNormalTest(TestCase):
 class TOTPCallableTest(TestCase):
     """Time-Based OTP callable parameters Test."""
 
-    @patch("wtf_otp.validators.otp.TOTP")
+    @patch("pyotp.TOTP")
     def setUp(self, totp):
         """Setup."""
         self.secret = random_base32()
@@ -117,7 +99,7 @@ class TOTPCallableTest(TestCase):
 class TOTPValidationErrorTest(TestCase):
     """Time-Based OTP Normal Situation Test."""
 
-    @patch("wtf_otp.validators.otp.TOTP")
+    @patch("pyotp.TOTP")
     def setUp(self, totp):
         """Setup."""
         self.secret = random_base32()
