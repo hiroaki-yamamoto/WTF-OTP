@@ -22,6 +22,12 @@ class OTPSecretKeyField(StringField):
     is generated on client-side. Therefore, but I think the same thing happens
     on server-side, the secret key transaction should be secured. i.e. it
     should be protected with SSL for example.
+
+    Security Consideration:
+        You should make any secret keys encrypted. For example, AES256 would
+        be a good idea. Note that you should NOT create your own encryption
+        algorithm. Creating encryption algorithm requires super deep knowledge
+        of mathematic skills and you are not a crypto-master.
     """
 
     widget = OTPSecretKeyWidget()

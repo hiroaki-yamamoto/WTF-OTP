@@ -5,5 +5,6 @@
 
 from .widgets import OTPSecretKeyWidget
 from .fields import OTPSecretKeyField
+from .validators import OTPCheck
 
-__all__ = ("OTPSecretKeyWidget", "OTPSecretKeyField")
+__all__ = ("OTPSecretKeyWidget", "OTPSecretKeyField", "OTPCheck")
