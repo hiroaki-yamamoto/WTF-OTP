@@ -19,11 +19,9 @@ from wtf_otp import OTPCheck
 class TOTPNormalTest(TestCase):
     """Time-Based OTP Normal Situation Test."""
 
-    @patch("pyotp.TOTP")
-    def setUp(self, totp):
+    def setUp(self):
         """Setup."""
         self.secret = random_base32()
-        self.totp = totp
 
         class TestForm(Form):
             """Test Form."""
@@ -38,15 +36,18 @@ class TOTPNormalTest(TestCase):
         self.key = TOTP(self.secret).now()
         self.form = TestForm(data={"totp": self.key})
 
-    def test_init(self):
-        """pyotp.TOTP() should be called."""
-        self.totp.assert_called_once_with(self.secret, interval=30)
+    @patch("pyotp.TOTP")
+    def test_init(self, totp):
+        """Any arguments shouldn't be called at this step."""
+        totp.assert_not_called()
+        totp.return_value.verify.assert_not_called()
 
-    def test_verify_check(self):
-        """pyotp.TOTP().verify should be called."""
-        self.totp.return_value.verify.assert_not_called()
+    @patch("pyotp.TOTP")
+    def test_verify_check(self, totp):
+        """Verification step should be processed."""
         self.form.validate()
-        self.totp.return_value.verify.assert_called_once_with(
+        totp.assert_called_once_with(self.secret, interval=30)
+        totp.return_value.verify.assert_called_once_with(
             self.form.totp.data, valid_window=0
         )
 
@@ -54,44 +55,48 @@ class TOTPNormalTest(TestCase):
 class TOTPCallableTest(TestCase):
     """Time-Based OTP callable parameters Test."""
 
-    @patch("pyotp.TOTP")
-    def setUp(self, totp):
+    def setUp(self):
         """Setup."""
-        self.secret = random_base32()
-        self.totp = totp
+        self.secret = MagicMock(return_value=random_base32())
         self.interval = MagicMock(return_value=30)
         self.valid_window = MagicMock(return_value=0)
+        self.method = MagicMock(return_value="TOTP")
 
         class TestForm(Form):
             """Test Form."""
 
             totp = StringField(validators=[
                 OTPCheck(
-                    self.secret, method="TOTP", interval=self.interval,
+                    self.secret, method=self.method, interval=self.interval,
                     call_args={"valid_window": self.valid_window}
                 )
             ])
 
-        self.key = TOTP(self.secret).now()
+        self.key = TOTP(self.secret.return_value).now()
         self.form = TestForm(data={"totp": self.key})
 
-    def test_interval_call(self):
-        """Interval that is set as init args should be called."""
-        self.interval.assert_called_once_with()
-
-    def test_init(self):
-        """pyotp.TOTP() should be called."""
-        self.totp.assert_called_once_with(
-            self.secret, interval=self.interval.return_value
-        )
-
-    def test_verify_check(self):
-        """pyotp.TOTP().verify should be called."""
-        self.totp.return_value.verify.assert_not_called()
+    @patch("pyotp.TOTP")
+    def test_init(self, totp):
+        """Any functions shouldn't be called."""
+        self.secret.assert_not_called()
+        self.interval.assert_not_called()
+        totp.assert_not_called()
+        totp.return_value.verify.assert_not_called()
         self.valid_window.assert_not_called()
+        self.method.assert_not_called()
+
+    @patch("pyotp.TOTP")
+    def test_verify_check(self, totp):
+        """Verification step should be processed."""
         self.form.validate()
-        self.valid_window.assert_called_once_with()
-        self.totp.return_value.verify.assert_called_once_with(
+        totp.assert_called_once_with(
+            self.secret.return_value, interval=self.interval.return_value
+        )
+        self.method.assert_called_once_with(self.form, self.form.totp)
+        self.secret.assert_called_once_with(self.form, self.form.totp)
+        self.interval.assert_called_once_with(self.form, self.form.totp)
+        self.valid_window.assert_called_once_with(self.form, self.form.totp)
+        totp.return_value.verify.assert_called_once_with(
             self.form.totp.data, valid_window=self.valid_window.return_value
         )
 
@@ -99,12 +104,9 @@ class TOTPCallableTest(TestCase):
 class TOTPValidationErrorTest(TestCase):
     """Time-Based OTP Normal Situation Test."""
 
-    @patch("pyotp.TOTP")
-    def setUp(self, totp):
+    def setUp(self):
         """Setup."""
         self.secret = random_base32()
-        self.totp = totp
-        self.totp.return_value.verify.return_value = False
 
         class TestForm(Form):
             """Test Form."""
@@ -119,15 +121,19 @@ class TOTPValidationErrorTest(TestCase):
         self.key = TOTP(self.secret).now()
         self.form = TestForm(data={"totp": self.key})
 
-    def test_init(self):
+    @patch("pyotp.TOTP")
+    def test_init(self, totp):
         """pyotp.TOTP() should be called."""
-        self.totp.assert_called_once_with(self.secret, interval=30)
+        totp.assert_not_called()
+        totp.return_value.verify.assert_not_called()
 
-    def test_verify_check(self):
-        """pyotp.TOTP().verify should be called and has a error."""
-        self.totp.return_value.verify.assert_not_called()
+    @patch("pyotp.TOTP")
+    def test_verify_check(self, totp):
+        """It should raise a error."""
+        totp.return_value.verify.return_value = False
         self.form.validate()
-        self.totp.return_value.verify.assert_called_once_with(
+        totp.assert_called_once_with(self.secret, interval=30)
+        totp.return_value.verify.assert_called_once_with(
             self.form.totp.data, valid_window=0
         )
         self.assertDictEqual(

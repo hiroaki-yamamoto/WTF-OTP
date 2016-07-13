@@ -26,33 +26,64 @@ class OTPCheck(object):
                 otp. If you want to use time-based otp, set "TOTP". And,
                 setting "HOTP", counter-based otp is used. Note that "TOTP" and
                 "HOTP" is case-insensitive as the code shows.
+                This can be callable.
             call_args: Any keyword arguments to be passed to
                 pyotp.(TOTP|HTOP).verify(). Note that all values are able to
                 be callable functions that return the corresponding values.
             **kwargs: Any keyword arguments to be passed to
                 pyotp.(TOTP|HTOP).__init__(). Note that all values are able to
                 be callable functions that return the corresponding values.
+
+        Note when putting callable value to each param:
+            As you can see, all parameters can be callable function and when
+            putitng it to each param, the value is evaluated dynamically.
+            However, the form and field is passed as a parameter to the target
+            variable. For example, if you put (lambda: "HOTP") to method param,
+            the param is called with form, field. i.e. seld.method(form, field)
+            as the code shows
         """
-        _method = method.upper()
-        init_args = {}
-        for (key, value) in kwargs.items():
-            try:
-                init_args[key] = value()
-            except TypeError:
-                init_args[key] = value
+        self.method = method
+        if isinstance(self.method, str):
+            self.__check_method(self.method)
+        self.secret = secret
+        self.init_args = kwargs
 
         self.call_args = call_args or {}
-        if _method not in ["TOTP", "HOTP"]:
+
+    def __expand(self, value, form, field):
+        try:
+            return value(form, field)
+        except TypeError:
+            return value
+
+    def __expand_dict(self, dct, form, field):
+        expanded = {
+            key: self.__expand(value, form, field)
+            for (key, value) in dct.items()
+        }
+        return expanded
+
+    def __check_method(self, value):
+        if value not in ["TOTP", "HOTP"]:
             raise ValueError("The method should be \"totp\" or \"hotp\".")
-        self.otp = getattr(pyotp, _method)(secret, **init_args)
+
+    def __expand_method(self, form, field):
+        ret = self.__expand(self.method, form, field).upper()
+        self.__check_method(ret)
+        return ret
+
+    def __expand_init_args(self, form, field):
+        return self.__expand_dict(self.init_args, form, field)
+
+    def __expand_call_args(self, form, field):
+        return self.__expand_dict(self.call_args, form, field)
 
     def __call__(self, form, field):
         """Validate the input data."""
-        call_args = {}
-        for (key, value) in self.call_args.items():
-            try:
-                call_args[key] = value()
-            except TypeError:
-                call_args[key] = value
+        call_args = self.__expand_call_args(form, field)
+        self.otp = getattr(pyotp, self.__expand_method(form, field))(
+            self.__expand(self.secret, form, field),
+            **self.__expand_init_args(form, field)
+        )
         if not self.otp.verify(field.data, **call_args):
             raise ValidationError("OTP Token Mismatch.")
