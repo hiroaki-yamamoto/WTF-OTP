@@ -85,5 +85,5 @@ class OTPCheck(object):
             self.__expand(self.secret, form, field),
             **self.__expand_init_args(form, field)
         )
-        if not self.otp.verify(field.data, **call_args):
+        if not self.otp.verify(int(field.data), **call_args):
             raise ValidationError("OTP Token Mismatch.")
