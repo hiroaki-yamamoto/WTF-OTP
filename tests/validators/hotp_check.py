@@ -48,7 +48,7 @@ class HOTPNormalTest(TestCase):
         self.form.validate()
         hotp.assert_called_once_with(self.secret, window=3)
         hotp.return_value.verify.assert_called_once_with(
-            self.form.hotp.data, counter=0
+            int(self.form.hotp.data), counter=0
         )
 
 
@@ -100,7 +100,7 @@ class HOTPCallableTest(TestCase):
             self.secret.return_value, window=self.window.return_value
         )
         hotp.return_value.verify.assert_called_once_with(
-            self.form.hotp.data, counter=self.counter.return_value
+            int(self.form.hotp.data), counter=self.counter.return_value
         )
 
 
@@ -138,7 +138,7 @@ class HOTPValidationErrorTest(TestCase):
         self.form.validate()
         hotp.assert_called_once_with(self.secret, window=3)
         hotp.return_value.verify.assert_called_once_with(
-            self.form.hotp.data, counter=0
+            int(self.form.hotp.data), counter=0
         )
         self.assertDictEqual(
             {"hotp": ["OTP Token Mismatch."]}, self.form.errors

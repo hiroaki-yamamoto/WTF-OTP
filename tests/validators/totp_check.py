@@ -48,7 +48,7 @@ class TOTPNormalTest(TestCase):
         self.form.validate()
         totp.assert_called_once_with(self.secret, interval=30)
         totp.return_value.verify.assert_called_once_with(
-            self.form.totp.data, valid_window=0
+            int(self.form.totp.data), valid_window=0
         )
 
 
@@ -97,7 +97,8 @@ class TOTPCallableTest(TestCase):
         self.interval.assert_called_once_with(self.form, self.form.totp)
         self.valid_window.assert_called_once_with(self.form, self.form.totp)
         totp.return_value.verify.assert_called_once_with(
-            self.form.totp.data, valid_window=self.valid_window.return_value
+            int(self.form.totp.data),
+            valid_window=self.valid_window.return_value
         )
 
 
@@ -134,7 +135,7 @@ class TOTPValidationErrorTest(TestCase):
         self.form.validate()
         totp.assert_called_once_with(self.secret, interval=30)
         totp.return_value.verify.assert_called_once_with(
-            self.form.totp.data, valid_window=0
+            int(self.form.totp.data), valid_window=0
         )
         self.assertDictEqual(
             {"totp": ["OTP Token Mismatch."]}, self.form.errors
