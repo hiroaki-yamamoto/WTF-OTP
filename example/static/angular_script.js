@@ -4,8 +4,8 @@
   ng.module("OTPApp", [
   ]).controller("OTPController", ["$scope", function(scope) {
     scope.model = {};
-    scope.$watch("model", function(data) {
-      console.log(data);
-    }, true);
+    scope.toJson = ng.toJson;
+  }]).controller("OTPAuthController", [function() {
+    return undefined;
   }]);
 })(angular);

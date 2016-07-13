@@ -7,8 +7,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
   <script src="{{ url_for('.static', filename='angular_script.js') }}" defer></script>
 </head>
-<body data-ng-app="OTPApp" data-ng-controller="OTPController">
-  <section>
+<body data-ng-app="OTPApp">
+  <section data-ng-controller="OTPController">
     <header>
       <h1>Secret Key Generation</h1>
     </header>
@@ -21,8 +21,21 @@
     </form>
     <div>
       <h2>Result</h2>
-      {{"{{ model }}"}}
+      {{"{{ toJson(model) }}"}}
     </div>
+  </section>
+  <section data-ng-controller="OTPAuthController">
+    <header><h1>Authentication Section</h1></header>
+    <form name="OTPAuthForm" data-ng-submit="submit()">
+      {% for field in auth_form -%}
+        {% if field.name != 'csrf_token' -%}
+          {{ field.label() }} {{ field() }}
+        {%- endif %}
+      {%- endfor %}
+      <button type="submit">Submit</button>
+      <h2>Result</h2>
+      {{"{{ toJson(result) }}"}}
+    </form>
   </section>
 </body>
 </html>

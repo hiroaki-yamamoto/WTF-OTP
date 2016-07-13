@@ -3,7 +3,9 @@
 
 from flask import Flask, render_template, make_response, request, abort
 from flask_wtf import Form
-from wtf_otp import OTPSecretKeyField
+import wtforms.fields as fld
+import wtforms.validators as vld
+from wtf_otp import OTPSecretKeyField, OTPCheck
 
 app = Flask(__name__)
 app.debug = True
@@ -58,6 +60,23 @@ class SecretKeyTestForm(Form):
     )
 
 
+class OTPAuthentication(Form):
+    """OTP Authentication form."""
+
+    secret = OTPSecretKeyField(render_kw={
+        "qrcode_url": "/qrcode",
+        "data-ng-model": "model.test",
+        "module": "OTPApp"
+    })
+    check = fld.IntegerField(validators=[
+        vld.NumberRange(min=0, max=999999),
+        OTPCheck(
+            secret=lambda form, field: form.secret.data,
+            method="TOTP"
+        )
+    ])
+
+
 @app.route("/")
 def index():
     form = SecretKeyTestForm()
@@ -67,7 +86,9 @@ def index():
     form.angular_secret_hasdata.data = form.angular_secret_hasdata.generate()
     form.angular_secret_noqrcode_hasdata.data = \
         form.angular_secret_noqrcode_hasdata.generate()
-    return render_template("index.html", form=form)
+
+    auth_form = OTPAuthentication()
+    return render_template("index.html", form=form, auth_form=auth_form)
 
 
 @app.route("/qrcode")
