@@ -84,11 +84,10 @@ def generate_qrcode(req, res):
   secret = req.args.get("secret")
   if not secret:
       abort(404)
-  resp = make_response(form.secret.qrcode(
+  res.make_response(form.secret.qrcode(
       secret, name="Test Example", issuer_name="Test Corp"
   ))
   resp.mimetype = "image/svg+xml"
-  return resp
 ```
 
 Note that you can't get the instance by `UserInfoForm.secret`, because
