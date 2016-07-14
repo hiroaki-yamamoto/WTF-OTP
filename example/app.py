@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from flask import Flask, render_template, make_response, request, abort
+from flask import (
+    Flask, render_template, make_response, request, abort,
+    jsonify
+)
 from flask_wtf import Form
+from flask_wtf.csrf import CsrfProtect, generate_csrf
 import wtforms.fields as fld
 import wtforms.validators as vld
 from wtf_otp import OTPSecretKeyField, OTPCheck
@@ -12,6 +16,8 @@ app.debug = True
 app.config["SECRET_KEY"] = (
     lambda: "2ekN1=0dafF2g6Ijk~tNMzo5_B;a02zK729MAhY|I9EN52JD1z"
 )()
+app.config["WTF_CSRF_METHODS"] = ["POST", "PUT", "PATCH", "DELETE"]
+CsrfProtect(app)
 
 
 class SecretKeyTestForm(Form):
@@ -65,7 +71,7 @@ class OTPAuthentication(Form):
 
     secret = OTPSecretKeyField(render_kw={
         "qrcode_url": "/qrcode",
-        "data-ng-model": "model.test",
+        "data-ng-model": "model.secret",
         "module": "OTPApp"
     })
     check = fld.IntegerField(validators=[
@@ -74,7 +80,7 @@ class OTPAuthentication(Form):
             secret=lambda form, field: form.secret.data,
             method="TOTP"
         )
-    ])
+    ], render_kw={"data-ng-model": "model.check"})
 
 
 @app.route("/")
@@ -103,6 +109,20 @@ def render_qrcode():
     resp.mimetype = "image/svg+xml"
     return resp
 
+
+@app.route("/auth", methods=["POST"])
+def auth():
+    form = OTPAuthentication()
+    status = {"status": "ok" if form.validate() else "wrong"}
+    status.update({"errors": form.errors})
+    return make_response(jsonify(status), 417 if form.errors else 200)
+
+
+@app.after_request
+def csrf_prevent(resp):
+    """Add CSRF Preventation for angularJS."""
+    resp.set_cookie("X-CSRFToken", generate_csrf())
+    return resp
 
 def main():
     app.run()

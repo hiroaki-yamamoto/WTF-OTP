@@ -48,7 +48,10 @@ class OTPSecretKeyWidget(object):
         if qrcode_url:
             qrcode.update({
                 "url": qrcode_url,
-                "args": {"id": ("otpauthQR{}").format(field.id)}
+                "args": {
+                    "id": ("otpauthQR{}").format(field.id),
+                    "class": "otp-qrcode"
+                }
             })
         script_args = {}
 
