@@ -184,7 +184,10 @@ class OTPWidgetJQueryQRCodeTest(TestCase):
             button_args={"id": "btn-" + self.field.id},
             qrcode={
                 "url": "/qrcode",
-                "args": {"id": ("otpauthQR{}").format(self.field.id)}
+                "args": {
+                    "id": ("otpauthQR{}").format(self.field.id),
+                    "class": "otp-qrcode"
+                }
             },
             script_args={}
         )
@@ -232,7 +235,8 @@ class OTPWidgetAngularQRCodeTest(TestCase):
             qrcode={
                 "url": "/qrcode",
                 "args": {
-                    "id": ("otpauthQR{}").format(self.field.id)
+                    "id": ("otpauthQR{}").format(self.field.id),
+                    "class": "otp-qrcode"
                 }
             }
         )

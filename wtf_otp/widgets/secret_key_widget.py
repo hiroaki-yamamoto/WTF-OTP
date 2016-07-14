@@ -39,21 +39,23 @@ class OTPSecretKeyWidget(object):
                 i.e. inputs are wrapped with div tags.
             qrcode_url: URL to generate QR Code.
                 CAUTION: DO NOT specify external url for security reason.
+            qrcode_attr: Any attribute for div tag that contains qrcode image.
         """
         input_args = kwargs.pop("input_args", {})
         button_args = kwargs.pop("button_args", {})
         div_args = kwargs.pop("div_args", {})
         qrcode = {}
         qrcode_url = kwargs.pop("qrcode_url", None)
+        qrcode_attr = kwargs.pop("qrcode_attr", {})
+        script_args = {}
+
         if qrcode_url:
             qrcode.update({
                 "url": qrcode_url,
-                "args": {
-                    "id": ("otpauthQR{}").format(field.id),
-                    "class": "otp-qrcode"
-                }
+                "args": qrcode_attr
             })
-        script_args = {}
+            qrcode["args"].setdefault("id", ("otpauthQR{}").format(field.id))
+            qrcode["args"].setdefault("class", "otp-qrcode")
 
         input_args.update(kwargs)
         if getattr(field, "data", None):
