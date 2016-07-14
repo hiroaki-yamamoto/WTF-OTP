@@ -23,8 +23,86 @@ This module has Google's [2 factor authentication fields] for [WT-Forms].
 [WT-Forms]: https://wtforms.readthedocs.org/
 
 ## How to use
+Note that this tutorial is intended to use [flask],
+[flask-wtf], and [flask-login].
 
-WIP
+[flask]: http://flask.pocoo.org/
+[flask-wtf]: http://flask-wtf.readthedocs.io/en/latest/
+[flask-login]: https://flask-login.readthedocs.io/en/latest/
+
+### If you want QR Code:
+First, write the form to generate secret key and authenticate it:
+
+`form.py`
+```python
+#!/usr/bin/env python
+# coding=utf-8
+
+from flask_wtf import Form
+import wtforms.fields as fld
+import wtforms.fields.html5 as fld5
+import wtforms.validators as vld
+from wtf_otp import OTPSecretKeyField, OTPCheck
+
+class UserInfoForm(Form):
+  name = fld.StringField()
+  email = fld5.EmailField(validators=[
+    vld.InputRequired(), vld.Email()
+  ])
+  password = fld.PasswordField()
+  new_password = fld.PasswordField()
+  confirm_password = fld.PasswordField(validators=[
+    vld.EqualTo("new_password")
+  ])
+  secret = OTPSecretKeyField(
+    qrcode_url="/qrcode", validators=[vld.InputRequired()]
+  )
+
+class LoginForm(Form):
+  email = fld5.EmailField(validators=[
+    vld.InputRequired(), vld.Email()
+  ])
+  passwrd = fld.PasswordField(validators=[
+    vld.InputRequired()
+  ])
+  auth = fld.IntegerField(validators=[
+    validators=[vld.InputRequired(), OTPCheck()]
+  ])
+```
+
+Next, write the app as usual. However, you want to add a new route of which
+path is "/qrcode" that generates the qrcode. Fortuantely, the sufficient
+function is provided. An instance of `OTPSecretKeyField` provides `qrcode`
+function:
+
+```python
+from .form import UserInfoForm
+
+# /qrcode is assigned to generate_qrcode.
+def generate_qrcode(req, res):
+  form = UserInfoForm()
+  secret = req.args.get("secret")
+  if not secret:
+      abort(404)
+  resp = make_response(form.secret.qrcode(
+      secret, name="Test Example", issuer_name="Test Corp"
+  ))
+  resp.mimetype = "image/svg+xml"
+  return resp
+```
+
+Note that you can't get the instance by `UserInfoForm.secret`, because
+`UserInfoForm.secret` returns an instance of `UnboundField`.
+
+## If you don't want QRCode
+If you don't want QRCode, just remove `qrcode_url` from the corresponding
+classes and remove QRCode generation class.
+
+## More detail
+If you want more detail, please refer [source code] and [example code].
+
+[source code]: wtf_otp
+[example code]: example
 
 ## License (MIT License)
 
