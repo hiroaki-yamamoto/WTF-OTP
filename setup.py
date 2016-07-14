@@ -13,7 +13,7 @@ dependencies = [
 ]
 name = "WTF-OTP"
 desc = "One-Time Password for WTForms"
-version = "0.0.0"
+version = "0.5.0"
 
 if sys.version_info < (2, 7):
     raise RuntimeError(
