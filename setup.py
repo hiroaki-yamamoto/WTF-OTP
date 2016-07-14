@@ -41,8 +41,14 @@ setup(
     keywords="WTForms WT-Forms OTP One Time Password",
     url="https://github.com/hiroaki-yamamoto/mongoengine-goodjson",
     classifiers=[
-        "Development Status :: 1 - Planning",
+        "Development Status :: 3 - Alpha",
         "License :: OSI Approved :: MIT License",
+        "Intended Audience :: Developers",
+        ("Topic :: Internet :: WWW/HTTP :: "
+         "Dynamic Content :: CGI Tools/Libraries"),
+        "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+        "Framework :: Flask",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3.5"
     ]
