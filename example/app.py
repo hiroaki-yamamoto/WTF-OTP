@@ -69,8 +69,7 @@ class SecretKeyTestForm(Form):
 class OTPAuthentication(Form):
     """OTP Authentication form."""
 
-    secret = OTPSecretKeyField(render_kw={
-        "qrcode_url": "/qrcode",
+    secret = OTPSecretKeyField(qrcode_url="/qrcode", render_kw={
         "data-ng-model": "model.secret",
         "module": "OTPApp"
     })

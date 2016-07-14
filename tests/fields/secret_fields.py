@@ -31,6 +31,26 @@ class FieldTestBase(TestCase):
         self.form = self.TestForm()
 
 
+class QRCodeTest(TestCase):
+    """Secret key field with qrcode test."""
+
+    def setUp(self):
+        """Setup function."""
+        class QRCodeTestForm(Form):
+            """Test Form."""
+
+            otp = OTPSecretKeyField(qrcode_url="/qrcode")
+
+        self.TestForm = QRCodeTestForm
+        self.form = self.TestForm()
+
+    def test_qrcode(self):
+        """qrcode_url should be copied to kwargs."""
+        self.assertDictContainsSubset({
+            "qrcode_url": "/qrcode"
+        }, self.form.otp.render_kw)
+
+
 class SecretFieldTest(FieldTestBase):
     """Secret field Normal Initialization Test."""
 

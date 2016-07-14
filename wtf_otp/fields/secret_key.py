@@ -32,6 +32,23 @@ class OTPSecretKeyField(StringField):
 
     widget = OTPSecretKeyWidget()
 
+    def __init__(self, *args, **kwargs):
+        """
+        Initialize the class.
+
+        Keyword Arguments:
+            qrcode_url: The url that generates qrcode.
+            *args: Any arguments to be passed to self.__init__.
+            **kwargs: Any keyword arguments to be passed to self.__init__.
+        """
+        qrcode_url = kwargs.pop("qrcode_url", None)
+        render_kw = kwargs.pop("render_kw", {})
+        if qrcode_url:
+            render_kw["qrcode_url"] = qrcode_url
+        super(OTPSecretKeyField, self).__init__(
+            render_kw=render_kw, *args, **kwargs
+        )
+
     def generate(self, **kwargs):
         """
         Generate Secret Key.
