@@ -23,12 +23,6 @@ This module has Google's [2 factor authentication fields] for [WT-Forms].
 [WT-Forms]: https://wtforms.readthedocs.org/
 
 ## How to use
-Note that this tutorial is intended to use [flask],
-[flask-wtf], and [flask-login].
-
-[flask]: http://flask.pocoo.org/
-[flask-wtf]: http://flask-wtf.readthedocs.io/en/latest/
-[flask-login]: https://flask-login.readthedocs.io/en/latest/
 
 ### If you want QR Code:
 First, write the form to generate secret key and authenticate it:
