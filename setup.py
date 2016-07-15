@@ -39,7 +39,7 @@ setup(
     author_email="hiroaki@hysoftware.net",
     license="MIT",
     keywords="WTForms WT-Forms OTP One Time Password",
-    url="https://github.com/hiroaki-yamamoto/mongoengine-goodjson",
+    url="https://github.com/hiroaki-yamamoto/WTF-OTP",
     classifiers=[
         "Development Status :: 3 - Alpha",
         "License :: OSI Approved :: MIT License",
