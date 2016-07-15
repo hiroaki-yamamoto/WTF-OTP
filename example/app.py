@@ -96,6 +96,22 @@ def index():
     return render_template("index.html", form=form, auth_form=auth_form)
 
 
+@app.route("/postload")
+def postload():
+    form = SecretKeyTestForm()
+    form.jquery_secret_hasdata.data = form.jquery_secret_hasdata.generate()
+    form.jquery_secret_noqrcode_hasdata.data = \
+        form.jquery_secret_noqrcode_hasdata.generate()
+    form.angular_secret_hasdata.data = form.angular_secret_hasdata.generate()
+    form.angular_secret_noqrcode_hasdata.data = \
+        form.angular_secret_noqrcode_hasdata.generate()
+
+    auth_form = OTPAuthentication()
+    return render_template(
+        "index_postload.html", form=form, auth_form=auth_form
+    )
+
+
 @app.route("/qrcode")
 def render_qrcode():
     form = SecretKeyTestForm()
