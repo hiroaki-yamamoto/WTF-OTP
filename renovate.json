@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "rangeStrategy": "replace",
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "vulnerabilityAlerts": {
+    "enabled": true
+  },
+  "assignees": ["hiroaki-yamamoto"],
+  "reviewers": ["hiroaki-yamamoto"],
+  "groupName": "group"
+}
+
