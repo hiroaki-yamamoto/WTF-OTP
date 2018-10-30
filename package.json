@@ -21,9 +21,9 @@
   },
   "homepage": "https://github.com/hiroaki-yamamoto/wtf_otp#readme",
   "devDependencies": {
-    "eslint": "^2.13.1",
+    "eslint": "^5.0.0",
     "eslint-config-google": "^0.11.0",
-    "hyamamoto-job-toolbox": "^0.3.0",
+    "hyamamoto-job-toolbox": "^1.0.0",
     "q": "^1.4.1",
     "rimraf": "^2.5.2"
   }
