@@ -14,7 +14,7 @@ script:
 after_success:
   - coverage erase
   - coverage combine
-  - "coverage xml"
+  - coverage xml
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t coverage.py
 before_deploy:
   - "sed -i -e \"s/\\[VERSION\\]/${TRAVIS_TAG}/\" setup.py"
