@@ -13,7 +13,7 @@ dependencies = [
 ]
 name = "WTF-OTP"
 desc = "One-Time Password for WTForms"
-version = "0.5.2"
+version = "[VERSION]"
 
 if sys.version_info < (2, 7):
     raise RuntimeError(
@@ -21,7 +21,7 @@ if sys.version_info < (2, 7):
     )
 
 try:
-    with open('README.rst') as readme:
+    with open('README.md') as readme:
         long_desc = readme.read()
 except Exception:
     long_desc = None
@@ -31,6 +31,7 @@ setup(
     version=version,
     description=desc,
     long_description=long_desc,
+    long_description_content_type="text/markdown",
     packages=find_packages(exclude=["tests"]),
     include_package_data=True,
     install_requires=dependencies,
