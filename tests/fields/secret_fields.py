@@ -26,7 +26,7 @@ class FieldTestBase(TestCase):
     """Secret field test base class."""
 
     def setUp(self):
-        """Setup function."""
+        """Setup."""
         self.TestForm = TestForm
         self.form = self.TestForm()
 
@@ -35,7 +35,7 @@ class QRCodeTest(TestCase):
     """Secret key field with qrcode test."""
 
     def setUp(self):
-        """Setup function."""
+        """Setup."""
         class QRCodeTestForm(Form):
             """Test Form."""
 
@@ -63,14 +63,14 @@ class SecretFieldGenerationTest(FieldTestBase):
     """Secret field secret key generation test."""
 
     def test_secret_generation(self):
-        """QRCode should be generated."""
+        """Should generate QR-Code."""
         self.assertRegexpMatches(
             self.form.otp.generate(), re.compile("^[A-Z,2-7]{16}$")
         )
 
     @patch("wtf_otp.fields.secret_key.random_base32")
     def test_secret_param(self, generation):
-        """QRCode should be generated."""
+        """Should generate QR-Code."""
         test = {
             ("test{}").format(num): ("test_test{}").format(num)
             for num in range(20)
@@ -109,7 +109,7 @@ class SecretFieldQRCodeGenerationTest(FieldTestBase):
         self.otpurl.assert_called_once_with(self.secret, **self.param)
 
     def test_qrcode_body(self):
-        """QRCode Generator should be called with proper args."""
+        """Should call QRCode Generator with proper args."""
         from qrcode.image.svg import SvgPathImage as svg
         self.qrcode_mock.assert_called_once_with(
             self.otpurl.return_value, image_factory=svg

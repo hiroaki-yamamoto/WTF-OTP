@@ -41,6 +41,7 @@ class OTPCheck(object):
             variable. For example, if you put (lambda: "HOTP") to method param,
             the param is called with form, field. i.e. seld.method(form, field)
             as the code shows
+
         """
         self.method = method
         if isinstance(self.method, str):

@@ -6,10 +6,10 @@ import sys
 from setuptools import setup, find_packages
 
 dependencies = [
-    "WTForms==2.1",
-    "pyotp==2.1.1",
-    "jinja2==2.8",
-    "qrcode==5.3"
+    "WTForms",
+    "pyotp",
+    "jinja2",
+    "qrcode"
 ]
 name = "WTF-OTP"
 desc = "One-Time Password for WTForms"
@@ -41,15 +41,12 @@ setup(
     keywords="WTForms WT-Forms OTP One Time Password",
     url="https://github.com/hiroaki-yamamoto/WTF-OTP",
     classifiers=[
-        "Development Status :: 3 - Alpha",
         "License :: OSI Approved :: MIT License",
         "Intended Audience :: Developers",
         ("Topic :: Internet :: WWW/HTTP :: "
          "Dynamic Content :: CGI Tools/Libraries"),
         "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
         "Topic :: Software Development :: Libraries :: Python Modules",
-        "Framework :: Flask",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3.5"
+        "Framework :: Flask"
     ]
 )

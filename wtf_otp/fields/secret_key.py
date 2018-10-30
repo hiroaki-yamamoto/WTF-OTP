@@ -58,6 +58,7 @@ class OTPSecretKeyField(StringField):
             `pyotp.random_base32`.
 
         Return Value: 16 chars random string that is able to be a secret key.
+
         """
         return random_base32(**kwargs)
 
@@ -70,6 +71,7 @@ class OTPSecretKeyField(StringField):
 
         Parameters:
             **kwargs: Any keyword args to be passed to pyotp.utils.build_uri.
+
         """
         result = bytes()
         with BytesIO() as stream:
