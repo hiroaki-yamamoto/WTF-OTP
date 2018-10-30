@@ -65,6 +65,17 @@ class SecretKeyTestForm(Form):
         }
     )
 
+    def __init__(self):
+        """Init."""
+        super(SecretKeyTestForm, self).__init__()
+        self.jquery_secret_hasdata.data = self.jquery_secret_hasdata.generate()
+        self.jquery_secret_noqrcode_hasdata.data = \
+            self.jquery_secret_noqrcode_hasdata.generate()
+        self.angular_secret_hasdata.data = \
+            self.angular_secret_hasdata.generate()
+        self.angular_secret_noqrcode_hasdata.data = \
+            self.angular_secret_noqrcode_hasdata.generate()
+
 
 class OTPAuthentication(Form):
     """OTP Authentication form."""
@@ -85,13 +96,6 @@ class OTPAuthentication(Form):
 @app.route("/")
 def index():
     form = SecretKeyTestForm()
-    form.jquery_secret_hasdata.data = form.jquery_secret_hasdata.generate()
-    form.jquery_secret_noqrcode_hasdata.data = \
-        form.jquery_secret_noqrcode_hasdata.generate()
-    form.angular_secret_hasdata.data = form.angular_secret_hasdata.generate()
-    form.angular_secret_noqrcode_hasdata.data = \
-        form.angular_secret_noqrcode_hasdata.generate()
-
     auth_form = OTPAuthentication()
     return render_template("index.html", form=form, auth_form=auth_form)
 
@@ -99,13 +103,6 @@ def index():
 @app.route("/postload")
 def postload():
     form = SecretKeyTestForm()
-    form.jquery_secret_hasdata.data = form.jquery_secret_hasdata.generate()
-    form.jquery_secret_noqrcode_hasdata.data = \
-        form.jquery_secret_noqrcode_hasdata.generate()
-    form.angular_secret_hasdata.data = form.angular_secret_hasdata.generate()
-    form.angular_secret_noqrcode_hasdata.data = \
-        form.angular_secret_noqrcode_hasdata.generate()
-
     auth_form = OTPAuthentication()
     return render_template(
         "index_postload.html", form=form, auth_form=auth_form

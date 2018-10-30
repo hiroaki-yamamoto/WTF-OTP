@@ -1,12 +1,17 @@
 # One-Time Password Field for WT-Forms
 
 [![Build Status]][Build Status Link]
-[![Coverage Status]][Coverage Status Link]
+[![Maintainability]][Maintainability Link]
+[![Test Coverage]][Coverage Link]
+
 
 [Build Status]: https://travis-ci.org/hiroaki-yamamoto/WTF-OTP.svg?branch=master
 [Build Status Link]: https://travis-ci.org/hiroaki-yamamoto/WTF-OTP
-[Coverage Status]: https://coveralls.io/repos/github/hiroaki-yamamoto/WTF-OTP/badge.svg?branch=master
-[Coverage Status Link]: https://coveralls.io/github/hiroaki-yamamoto/WTF-OTP?branch=master
+[Maintainability]: https://api.codeclimate.com/v1/badges/c03f10d1351fa391e1d2/maintainability
+[Maintainability Link]: https://codeclimate.com/github/hiroaki-yamamoto/WTF-OTP/maintainability
+[Test Coverage]: https://api.codeclimate.com/v1/badges/c03f10d1351fa391e1d2/test_coverage
+[Coverage Link]: https://codeclimate.com/github/hiroaki-yamamoto/WTF-OTP/test_coverage
+
 
 ## What This?
 
