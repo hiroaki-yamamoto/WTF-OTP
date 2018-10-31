@@ -19,4 +19,4 @@ six==1.11.0               # via pydocstyle, tox
 snowballstemmer==1.2.1    # via pydocstyle
 toml==0.10.0              # via tox
 tox==3.5.3
-virtualenv==16.0.0        # via tox
+virtualenv==16.1.0        # via tox
