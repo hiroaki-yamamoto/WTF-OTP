@@ -15,8 +15,8 @@ py==1.7.0                 # via tox
 pycodestyle==2.4.0        # via flake8
 pydocstyle==3.0.0         # via flake8-docstrings
 pyflakes==2.0.0           # via flake8
-six==1.11.0               # via pydocstyle, tox
+six==1.12.0               # via pydocstyle, tox
 snowballstemmer==1.2.1    # via pydocstyle
 toml==0.10.0              # via tox
-tox==3.5.3
+tox==3.6.0
 virtualenv==16.1.0        # via tox
