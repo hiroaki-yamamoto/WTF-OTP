@@ -22,7 +22,7 @@
   "homepage": "https://github.com/hiroaki-yamamoto/wtf_otp#readme",
   "devDependencies": {
     "eslint": "^5.0.0",
-    "eslint-config-google": "^0.12.0",
+    "eslint-config-google": "^0.13.0",
     "hyamamoto-job-toolbox": "hiroaki-yamamoto/hiroaki-job-toolbox#1.0.8",
     "q": "^1.4.1",
     "rimraf": "^2.5.2"
