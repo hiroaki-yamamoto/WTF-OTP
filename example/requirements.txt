@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-click==7.1.1                # via flask
+click==7.1.2                # via flask
 flask-wtf==0.14.3
 flask==1.1.2
 itsdangerous==1.1.0       # via flask
