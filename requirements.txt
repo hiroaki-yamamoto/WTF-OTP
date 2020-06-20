@@ -11,7 +11,7 @@ flake8-polyfill==1.0.2    # via flake8-docstrings
 flake8==3.8.3
 mccabe==0.6.1             # via flake8
 pluggy==0.13.1             # via tox
-py==1.8.1                 # via tox
+py==1.8.2                 # via tox
 pycodestyle==2.6.0        # via flake8
 pydocstyle==5.0.2         # via flake8-docstrings
 pyflakes==2.2.0           # via flake8
