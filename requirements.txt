@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-coverage==5.2
+coverage==5.2.1
 filelock==3.0.12           # via tox
 flake8-docstrings==1.5.0
 flake8-polyfill==1.0.2    # via flake8-docstrings
@@ -18,5 +18,5 @@ pyflakes==2.2.0           # via flake8
 six==1.15.0               # via pydocstyle, tox
 snowballstemmer==2.0.0    # via pydocstyle
 toml==0.10.1              # via tox
-tox==3.17.1
-virtualenv==20.0.27        # via tox
+tox==3.18.0
+virtualenv==20.0.28        # via tox
