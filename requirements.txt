@@ -13,7 +13,7 @@ mccabe==0.6.1             # via flake8
 pluggy==0.13.1             # via tox
 py==1.9.0                 # via tox
 pycodestyle==2.6.0        # via flake8
-pydocstyle==5.1.0         # via flake8-docstrings
+pydocstyle==5.1.1         # via flake8-docstrings
 pyflakes==2.2.0           # via flake8
 six==1.15.0               # via pydocstyle, tox
 snowballstemmer==2.0.0    # via pydocstyle
