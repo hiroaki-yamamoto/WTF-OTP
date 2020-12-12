@@ -14,7 +14,7 @@ flake8==3.8.4             # via -r requirements.in, flake8-docstrings, flake8-po
 mccabe==0.6.1             # via flake8
 packaging==20.8           # via tox
 pluggy==0.13.1            # via tox
-py==1.9.0                 # via tox
+py==1.10.0                 # via tox
 pycodestyle==2.6.0        # via flake8
 pydocstyle==5.1.1         # via flake8-docstrings
 pyflakes==2.2.0           # via flake8
