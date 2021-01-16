@@ -22,5 +22,5 @@ pyparsing==2.4.7          # via packaging
 six==1.15.0               # via packaging, tox, virtualenv
 snowballstemmer==2.0.0    # via pydocstyle
 toml==0.10.2              # via tox
-tox==3.21.0               # via -r requirements.in
-virtualenv==20.3.0       # via tox
+tox==3.21.1               # via -r requirements.in
+virtualenv==20.3.1       # via tox
