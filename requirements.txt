@@ -20,7 +20,7 @@ pydocstyle==5.1.1         # via flake8-docstrings
 pyflakes==2.2.0           # via flake8
 pyparsing==2.4.7          # via packaging
 six==1.15.0               # via packaging, tox, virtualenv
-snowballstemmer==2.0.0    # via pydocstyle
+snowballstemmer==2.1.0    # via pydocstyle
 toml==0.10.2              # via tox
-tox==3.21.1               # via -r requirements.in
-virtualenv==20.3.1       # via tox
+tox==3.21.2               # via -r requirements.in
+virtualenv==20.4.0       # via tox
