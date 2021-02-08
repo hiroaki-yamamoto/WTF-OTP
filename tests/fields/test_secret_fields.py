@@ -65,7 +65,7 @@ class SecretFieldGenerationTest(FieldTestBase):
     def test_secret_generation(self):
         """Should generate QR-Code."""
         self.assertRegexpMatches(
-            self.form.otp.generate(), re.compile("^[A-Z,2-7]{26}$")
+            self.form.otp.generate(), re.compile("^[A-Z,2-7]{16,}$")
         )
 
     @patch("wtf_otp.fields.secret_key.random_base32")
