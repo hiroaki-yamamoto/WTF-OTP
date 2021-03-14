@@ -17,7 +17,7 @@ pluggy==0.13.1            # via tox
 py==1.10.0                 # via tox
 pycodestyle==2.6.0        # via flake8
 pydocstyle==5.1.1         # via flake8-docstrings
-pyflakes==2.2.0           # via flake8
+pyflakes==2.3.0           # via flake8
 pyparsing==2.4.7          # via packaging
 six==1.15.0               # via packaging, tox, virtualenv
 snowballstemmer==2.1.0    # via pydocstyle
