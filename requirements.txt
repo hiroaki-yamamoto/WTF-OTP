@@ -12,7 +12,7 @@ flake8-docstrings==1.6.0  # via -r requirements.in
 flake8-polyfill==1.0.2    # via -r requirements.in
 flake8==3.9.2             # via -r requirements.in, flake8-docstrings, flake8-polyfill
 mccabe==0.6.1             # via flake8
-packaging==20.9           # via tox
+packaging==21.0           # via tox
 pluggy==0.13.1            # via tox
 py==1.10.0                 # via tox
 pycodestyle==2.7.0        # via flake8
