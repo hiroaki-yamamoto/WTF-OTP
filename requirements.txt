@@ -5,7 +5,7 @@
 #    pip-compile
 #
 appdirs==1.4.4            # via virtualenv
-coverage==6.0             # via -r requirements.in
+coverage==6.0.1             # via -r requirements.in
 distlib==0.3.3            # via virtualenv
 filelock==3.3.0          # via tox, virtualenv
 flake8-docstrings==1.6.0  # via -r requirements.in
@@ -15,9 +15,9 @@ mccabe==0.6.1             # via flake8
 packaging==21.0           # via tox
 pluggy==1.0.0            # via tox
 py==1.10.0                 # via tox
-pycodestyle==2.7.0        # via flake8
+pycodestyle==2.8.0        # via flake8
 pydocstyle==6.1.1         # via flake8-docstrings
-pyflakes==2.3.1           # via flake8
+pyflakes==2.4.0           # via flake8
 pyparsing==2.4.7          # via packaging
 six==1.16.0               # via packaging, tox, virtualenv
 snowballstemmer==2.1.0    # via pydocstyle
