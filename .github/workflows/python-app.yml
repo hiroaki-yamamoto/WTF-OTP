@@ -10,38 +10,61 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
     container:
       image: python:alpine
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Install curl
-      run: apk update && apk add -q curl git
-    - name: Download coverage
-      run: |
-        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 \
-          -o ./cc-test-reporter
-        chmod +x ./cc-test-reporter
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Test & Send Coverage
-      run: |
-        export GIT_COMMITTED_AT=$(date +%s)
-        ./cc-test-reporter before-build
-        tox -p all -q
-        export TEST_RESULT=${?}
-        export GIT_BRANCH=$(basename ${{ github.repository }} ${{ github.repository_owner }})
-        echo $GIT_BRANCH
-        coverage xml
-        ./cc-test-reporter after-build --exit-code $TEST_RESULT -t coverage.py
-      env:
-        GIT_COMMIT_SHA: ${{ github.sha }}
-        CI_NAME: "Github Action"
-        CI_BUILD_ID: ${{ github.run_number }}
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      - uses: actions/checkout@v2
+      - name: Install curl
+        run: apk update && apk add -q curl git
+      - name: Download coverage
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 \
+            -o ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Test & Send Coverage
+        run: |
+          export GIT_COMMITTED_AT=$(date +%s)
+          ./cc-test-reporter before-build
+          tox -p all -q
+          export TEST_RESULT=${?}
+          export GIT_BRANCH=$(basename ${{ github.repository }} ${{ github.repository_owner }})
+          echo $GIT_BRANCH
+          coverage xml
+          ./cc-test-reporter after-build --exit-code $TEST_RESULT -t coverage.py
+        env:
+          GIT_COMMIT_SHA: ${{ github.sha }}
+          CI_NAME: "Github Action"
+          CI_BUILD_ID: ${{ github.run_number }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+  deploy:
+    runs-on: ubuntu-latest
+    container: python:alpine
+    needs: build
+    environment: deploy
+
+    steps:
+      - name: Install sed
+        run: apk update && apk add -q sed
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Replace the version
+        run: "sed -i -e \"s/\\[VERSION\\]/${TRAVIS_TAG}/\" setup.py"
+      - name: Create the package
+        run: python setup.py sdist
+      - name: Deploy
+        run: twine upload
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
