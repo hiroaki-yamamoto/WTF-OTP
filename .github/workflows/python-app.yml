@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install curl
-        run: apk update && apk add -q curl git
+        run: apk update && apk add -q curl git gcc
       - name: Download coverage
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 \
