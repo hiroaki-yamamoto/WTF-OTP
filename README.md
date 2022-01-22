@@ -4,9 +4,8 @@
 [![Maintainability]][Maintainability Link]
 [![Test Coverage]][Coverage Link]
 
-
-[Build Status]: https://travis-ci.org/hiroaki-yamamoto/WTF-OTP.svg?branch=master
-[Build Status Link]: https://travis-ci.org/hiroaki-yamamoto/WTF-OTP
+[Build Status]: https://app.travis-ci.com/hiroaki-yamamoto/WTF-OTP.svg?branch=master
+[Build Status Link]: https://app.travis-ci.com/hiroaki-yamamoto/WTF-OTP
 [Maintainability]: https://api.codeclimate.com/v1/badges/c03f10d1351fa391e1d2/maintainability
 [Maintainability Link]: https://codeclimate.com/github/hiroaki-yamamoto/WTF-OTP/maintainability
 [Test Coverage]: https://api.codeclimate.com/v1/badges/c03f10d1351fa391e1d2/test_coverage
