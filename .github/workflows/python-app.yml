@@ -26,9 +26,7 @@ jobs:
     - uses: paambaati/codeclimate-action@v3.0.0
       with:
         coverageLocations: coverage.xml:coverage.py
-        coverageCommand: |
-          tox -p all -q
-          coverage xml
+        coverageCommand: tox -p all -q && coverage xml
       env:
         GITHUB_REF_NAME: '${{ github.ref }}'
         GITHUB_SHA: '${{ github.sha }}'
