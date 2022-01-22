@@ -1,11 +1,14 @@
 # One-Time Password Field for WT-Forms
 
-[![Build Status]][Build Status Link]
+[![Test Status]][Test Status Link]
+[![Deploy Status]][Deploy Status Link]
 [![Maintainability]][Maintainability Link]
 [![Test Coverage]][Coverage Link]
 
-[Build Status]: https://app.travis-ci.com/hiroaki-yamamoto/WTF-OTP.svg?branch=master
-[Build Status Link]: https://app.travis-ci.com/hiroaki-yamamoto/WTF-OTP
+[Test Status]: https://github.com/hiroaki-yamamoto/WTF-OTP/actions/workflows/python-test.yml/badge.svg
+[Test Status Link]: https://github.com/hiroaki-yamamoto/WTF-OTP/actions/workflows/python-test.yml
+[Deploy Status]: https://github.com/hiroaki-yamamoto/WTF-OTP/actions/workflows/python-deploy.yml/badge.svg
+[Deploy Status Link]: https://github.com/hiroaki-yamamoto/WTF-OTP/actions/workflows/python-deploy.yml
 [Maintainability]: https://api.codeclimate.com/v1/badges/c03f10d1351fa391e1d2/maintainability
 [Maintainability Link]: https://codeclimate.com/github/hiroaki-yamamoto/WTF-OTP/maintainability
 [Test Coverage]: https://api.codeclimate.com/v1/badges/c03f10d1351fa391e1d2/test_coverage
