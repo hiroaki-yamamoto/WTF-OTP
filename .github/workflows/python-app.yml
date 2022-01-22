@@ -33,8 +33,9 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: tox
       run: |
-        tox -p all
+        tox -p all -q
+        export TEST_RESULT=${?}
     - name: Aggregate coverage
       run: coverage xml
     - name: Send coveratge
-      run: ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t coverage.py
+      run: ./cc-test-reporter after-build --exit-code $TEST_RESULT -t coverage.py
