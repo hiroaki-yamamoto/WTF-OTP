@@ -48,7 +48,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     container: python:alpine
-    needs: build
+    needs: test
     environment: deploy
 
     steps:
