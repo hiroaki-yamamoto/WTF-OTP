@@ -18,15 +18,29 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Install curl
+      run: apk update && apk add -q curl git
+    - name: Download coverage
+      run: |
+        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 \
+          -o ./cc-test-reporter
+        chmod +x ./cc-test-reporter
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - uses: paambaati/codeclimate-action@v3.0.0
-      with:
-        coverageLocations: coverage.xml:coverage.py
-        coverageCommand: tox -p all -q && coverage xml
+    - name: Test & Send Coverage
+      run: |
+        GIT_COMMITTED_AT=$(date +%s)
+        ./cc-test-reporter before-build
+        tox -p all -q
+        export TEST_RESULT=${?}
+        coverage xml
+        ./cc-test-reporter after-build --exit-code $TEST_RESULT -t coverage.py
       env:
-        GITHUB_REF_NAME: '${{ github.ref }}'
-        GITHUB_SHA: '${{ github.sha }}'
+        GIT_BRANCH: ${{ github.ref }}
+        GIT_COMMIT_SHA: ${{ github.sha }}
+        CI_NAME: ${{ github.repository }}
+        CI_BUILD_ID: ${{ github.run_id }}
+        CI_BUILD_URL: https://github.com/hiroaki-yamamoto/WTF-OTP/runs/${{ github.run_id }}
