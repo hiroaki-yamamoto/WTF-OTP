@@ -42,5 +42,6 @@ jobs:
         ./cc-test-reporter after-build --exit-code $TEST_RESULT -t coverage.py
       env:
         GIT_COMMIT_SHA: ${{ github.sha }}
+        CI_NAME: "Github Action"
         CI_BUILD_ID: ${{ github.run_number }}
-        CI_BUILD_URL: https://github.com/hiroaki-yamamoto/WTF-OTP/runs/${{ github.run_number }}
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
