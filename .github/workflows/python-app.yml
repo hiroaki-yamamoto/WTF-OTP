@@ -32,15 +32,15 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test & Send Coverage
       run: |
-        GIT_COMMITTED_AT=$(date +%s)
+        export GIT_COMMITTED_AT=$(date +%s)
         ./cc-test-reporter before-build
         tox -p all -q
         export TEST_RESULT=${?}
+        export GIT_BRANCH=$(basename ${{ github.repository }} ${{ github.repository_owner }})
+        echo $GIT_BRANCH
         coverage xml
         ./cc-test-reporter after-build --exit-code $TEST_RESULT -t coverage.py
       env:
-        GIT_BRANCH: ${{ github.ref }}
         GIT_COMMIT_SHA: ${{ github.sha }}
-        CI_NAME: ${{ github.repository }}
-        CI_BUILD_ID: ${{ github.run_id }}
-        CI_BUILD_URL: https://github.com/hiroaki-yamamoto/WTF-OTP/runs/${{ github.run_id }}
+        CI_BUILD_ID: ${{ github.run_number }}
+        CI_BUILD_URL: https://github.com/hiroaki-yamamoto/WTF-OTP/runs/${{ github.run_number }}
