@@ -31,11 +31,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: tox
+    - name: Test & Send Coverage
       run: |
         tox -p all -q
         export TEST_RESULT=${?}
-    - name: Aggregate coverage
-      run: coverage xml
-    - name: Send coveratge
-      run: ./cc-test-reporter after-build --exit-code $TEST_RESULT -t coverage.py
+        coverage xml
+        ./cc-test-reporter after-build --exit-code $TEST_RESULT -t coverage.py
