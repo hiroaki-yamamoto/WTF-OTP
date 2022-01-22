@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies that is out of pip
-        run: apk update && apk add -q curl git gcc cffi
+        run: apk update && apk add -q curl git gcc glibc
       - name: Download coverage
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 \
