@@ -34,7 +34,7 @@ jobs:
           ./cc-test-reporter before-build
           tox -p all -q
           export TEST_RESULT=${?}
-          export GIT_BRANCH=$(basename ${{ github.repository }} ${{ github.repository_owner }})
+          export GIT_BRANCH=${{ github.ref_name }}
           echo $GIT_BRANCH
           coverage xml
           ./cc-test-reporter after-build --exit-code $TEST_RESULT -t coverage.py
