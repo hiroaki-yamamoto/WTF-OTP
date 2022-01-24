@@ -16,8 +16,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - uses: actions/setup-python@v2
+      - uses: actions/cache@v2
+        with:
+          key: ${{ runner.os }}-${{ hashFiles('./requirements.txt') }}
+          path: |
+            ~/.cache/pip
+            ./.tox
       - name: Download coverage
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 \
