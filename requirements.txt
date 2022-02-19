@@ -22,7 +22,7 @@ distlib==0.3.4
     # via virtualenv
 docutils==0.18.1
     # via readme-renderer
-filelock==3.4.2
+filelock==3.6.0
     # via
     #   tox
     #   virtualenv
@@ -37,7 +37,7 @@ flake8-polyfill==1.0.2
     # via -r requirements.in
 idna==3.3
     # via requests
-importlib-metadata==4.11.0
+importlib-metadata==4.11.1
     # via
     #   keyring
     #   twine
