@@ -101,7 +101,9 @@ tqdm==4.63.1
 twine==3.8.0
     # via -r requirements.in
 urllib3==1.26.9
-    # via requests
+    # via
+    #   requests
+    #   twine
 virtualenv==20.14.0
     # via tox
 webencodings==0.5.1

@@ -2,7 +2,8 @@
 # coding=utf-8
 
 """OTP Widgets."""
-from jinja2 import Environment, PackageLoader,  Markup
+from jinja2 import Environment, PackageLoader
+from markupsafe import Markup
 from wtforms.widgets import html_params
 
 
