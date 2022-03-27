@@ -96,13 +96,13 @@ toml==0.10.2
     # via tox
 tox==3.24.5
     # via -r requirements.in
-tqdm==4.63.0
+tqdm==4.63.1
     # via twine
 twine==3.8.0
     # via -r requirements.in
 urllib3==1.26.9
     # via requests
-virtualenv==20.13.4
+virtualenv==20.14.0
     # via tox
 webencodings==0.5.1
     # via bleach
