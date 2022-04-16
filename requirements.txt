@@ -94,7 +94,7 @@ snowballstemmer==2.2.0
     # via pydocstyle
 toml==0.10.2
     # via tox
-tox==3.24.5
+tox==3.25.0
     # via -r requirements.in
 tqdm==4.64.0
     # via twine
@@ -104,7 +104,7 @@ urllib3==1.26.9
     # via
     #   requests
     #   twine
-virtualenv==20.14.0
+virtualenv==20.14.1
     # via tox
 webencodings==0.5.1
     # via bleach
