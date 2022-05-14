@@ -14,7 +14,7 @@ charset-normalizer==2.0.12
     # via requests
 colorama==0.4.4
     # via twine
-coverage==6.3.2
+coverage==6.3.3
     # via -r requirements.in
 cryptography==37.0.2
     # via secretstorage
@@ -22,7 +22,7 @@ distlib==0.3.4
     # via virtualenv
 docutils==0.18.1
     # via readme-renderer
-filelock==3.6.0
+filelock==3.7.0
     # via
     #   tox
     #   virtualenv
@@ -71,7 +71,7 @@ pyflakes==2.4.0
     # via flake8
 pygments==2.12.0
     # via readme-renderer
-pyparsing==3.0.8
+pyparsing==3.0.9
     # via packaging
 readme-renderer==35.0
     # via twine
