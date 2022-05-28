@@ -14,7 +14,7 @@ charset-normalizer==2.0.12
     # via requests
 colorama==0.4.4
     # via twine
-coverage==6.3.3
+coverage==6.4
     # via -r requirements.in
 cryptography==37.0.2
     # via secretstorage
@@ -45,7 +45,7 @@ jeepney==0.8.0
     # via
     #   keyring
     #   secretstorage
-keyring==23.5.0
+keyring==23.5.1
     # via twine
 mccabe==0.6.1
     # via flake8
