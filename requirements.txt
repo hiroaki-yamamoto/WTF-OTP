@@ -6,13 +6,13 @@
 #
 bleach==5.0.0
     # via readme-renderer
-certifi==2022.5.18.1
+certifi==2022.6.15
     # via requests
 cffi==1.15.0
     # via cryptography
 charset-normalizer==2.0.12
     # via requests
-colorama==0.4.4
+colorama==0.4.5
     # via twine
 coverage==6.4.1
     # via -r requirements.in
