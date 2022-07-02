@@ -4,11 +4,11 @@
 #
 #    pip-compile
 #
-bleach==5.0.0
+bleach==5.0.1
     # via readme-renderer
 certifi==2022.6.15
     # via requests
-cffi==1.15.0
+cffi==1.15.1
     # via cryptography
 charset-normalizer==2.1.0
     # via requests
@@ -75,7 +75,7 @@ pyparsing==3.0.9
     # via packaging
 readme-renderer==35.0
     # via twine
-requests==2.28.0
+requests==2.28.1
     # via
     #   requests-toolbelt
     #   twine
@@ -94,7 +94,7 @@ snowballstemmer==2.2.0
     # via pydocstyle
 toml==0.10.2
     # via tox
-tox==3.25.0
+tox==3.25.1
     # via -r requirements.in
 tqdm==4.64.0
     # via twine
@@ -104,7 +104,7 @@ urllib3==1.26.9
     # via
     #   requests
     #   twine
-virtualenv==20.15.0
+virtualenv==20.15.1
     # via tox
 webencodings==0.5.1
     # via bleach
