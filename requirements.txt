@@ -14,11 +14,11 @@ charset-normalizer==2.1.0
     # via requests
 colorama==0.4.5
     # via twine
-coverage==6.4.1
+coverage==6.4.2
     # via -r requirements.in
 cryptography==37.0.4
     # via secretstorage
-distlib==0.3.4
+distlib==0.3.5
     # via virtualenv
 docutils==0.19
     # via readme-renderer
@@ -45,7 +45,7 @@ jeepney==0.8.0
     # via
     #   keyring
     #   secretstorage
-keyring==23.6.0
+keyring==23.7.0
     # via twine
 mccabe==0.6.1
     # via flake8
@@ -108,5 +108,5 @@ virtualenv==20.15.1
     # via tox
 webencodings==0.5.1
     # via bleach
-zipp==3.8.0
+zipp==3.8.1
     # via importlib-metadata
