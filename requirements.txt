@@ -100,11 +100,11 @@ tqdm==4.64.0
     # via twine
 twine==4.0.1
     # via -r requirements.in
-urllib3==1.26.10
+urllib3==1.26.11
     # via
     #   requests
     #   twine
-virtualenv==20.15.1
+virtualenv==20.16.2
     # via tox
 webencodings==0.5.1
     # via bleach
