@@ -12,8 +12,8 @@ cffi==1.15.1
     # via cryptography
 charset-normalizer==2.1.0
     # via requests
-colorama==0.4.5
-    # via twine
+commonmark==0.9.1
+    # via rich
 coverage==6.4.2
     # via -r requirements.in
 cryptography==37.0.4
@@ -38,21 +38,17 @@ flake8-polyfill==1.0.2
 idna==3.3
     # via requests
 importlib-metadata==4.12.0
-    # via
-    #   keyring
-    #   twine
+    # via twine
 jeepney==0.8.0
     # via
     #   keyring
     #   secretstorage
 keyring==23.7.0
     # via twine
-mccabe==0.6.1
+mccabe==0.7.0
     # via flake8
 packaging==21.3
-    # via
-    #   bleach
-    #   tox
+    # via tox
 pkginfo==1.8.3
     # via twine
 platformdirs==2.5.2
@@ -70,7 +66,9 @@ pydocstyle==6.1.1
 pyflakes==2.5.0
     # via flake8
 pygments==2.12.0
-    # via readme-renderer
+    # via
+    #   readme-renderer
+    #   rich
 pyparsing==3.0.9
     # via packaging
 readme-renderer==35.0
@@ -83,21 +81,20 @@ requests-toolbelt==0.9.1
     # via twine
 rfc3986==2.0.0
     # via twine
+rich==12.5.1
+    # via twine
 secretstorage==3.3.2
     # via keyring
 six==1.16.0
     # via
     #   bleach
     #   tox
-    #   virtualenv
 snowballstemmer==2.2.0
     # via pydocstyle
 toml==0.10.2
     # via tox
 tox==3.25.1
     # via -r requirements.in
-tqdm==4.64.0
-    # via twine
 twine==4.0.1
     # via -r requirements.in
 urllib3==1.26.11
