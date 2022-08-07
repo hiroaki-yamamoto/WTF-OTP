@@ -43,7 +43,7 @@ jeepney==0.8.0
     # via
     #   keyring
     #   secretstorage
-keyring==23.7.0
+keyring==23.8.0
     # via twine
 mccabe==0.7.0
     # via flake8
