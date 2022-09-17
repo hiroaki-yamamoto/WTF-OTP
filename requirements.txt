@@ -6,7 +6,7 @@
 #
 bleach==5.0.1
     # via readme-renderer
-certifi==2022.6.15.1
+certifi==2022.9.14
     # via requests
 cffi==1.15.1
     # via cryptography
@@ -35,7 +35,7 @@ flake8-docstrings==1.6.0
     # via -r requirements.in
 flake8-polyfill==1.0.2
     # via -r requirements.in
-idna==3.3
+idna==3.4
     # via requests
 importlib-metadata==4.12.0
     # via twine
