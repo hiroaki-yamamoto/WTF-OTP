@@ -105,5 +105,5 @@ virtualenv==20.16.5
     # via tox
 webencodings==0.5.1
     # via bleach
-zipp==3.8.1
+zipp==3.9.0
     # via importlib-metadata
