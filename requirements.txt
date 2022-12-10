@@ -22,7 +22,7 @@ distlib==0.3.6
     # via virtualenv
 docutils==0.19
     # via readme-renderer
-filelock==3.8.0
+filelock==3.8.2
     # via
     #   tox
     #   virtualenv
@@ -51,7 +51,7 @@ packaging==21.3
     # via tox
 pkginfo==1.9.2
     # via twine
-platformdirs==2.5.4
+platformdirs==2.6.0
     # via virtualenv
 pluggy==1.0.0
     # via tox
@@ -101,7 +101,7 @@ urllib3==1.26.13
     # via
     #   requests
     #   twine
-virtualenv==20.17.0
+virtualenv==20.17.1
     # via tox
 webencodings==0.5.1
     # via bleach
