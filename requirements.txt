@@ -37,13 +37,13 @@ flake8-polyfill==1.0.2
     # via -r requirements.in
 idna==3.4
     # via requests
-importlib-metadata==5.1.0
+importlib-metadata==5.2.0
     # via twine
 jeepney==0.8.0
     # via
     #   keyring
     #   secretstorage
-keyring==23.11.0
+keyring==23.13.1
     # via twine
 mccabe==0.7.0
     # via flake8
@@ -93,7 +93,7 @@ snowballstemmer==2.2.0
     # via pydocstyle
 toml==0.10.2
     # via tox
-tox==4.0.9
+tox==4.0.14
     # via -r requirements.in
 twine==4.0.2
     # via -r requirements.in
