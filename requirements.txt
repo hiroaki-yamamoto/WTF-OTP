@@ -14,7 +14,7 @@ charset-normalizer==3.0.1
     # via requests
 commonmark==0.9.1
     # via rich
-coverage==7.0.0
+coverage==7.0.1
     # via -r requirements.in
 cryptography==38.0.4
     # via secretstorage
@@ -93,7 +93,7 @@ snowballstemmer==2.2.0
     # via pydocstyle
 toml==0.10.2
     # via tox
-tox==4.0.14
+tox==4.0.16
     # via -r requirements.in
 twine==4.0.2
     # via -r requirements.in
