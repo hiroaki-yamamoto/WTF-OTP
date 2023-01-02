@@ -16,7 +16,7 @@ commonmark==0.9.1
     # via rich
 coverage==7.0.1
     # via -r requirements.in
-cryptography==38.0.4
+cryptography==39.0.0
     # via secretstorage
 distlib==0.3.6
     # via virtualenv
@@ -37,7 +37,7 @@ flake8-polyfill==1.0.2
     # via -r requirements.in
 idna==3.4
     # via requests
-importlib-metadata==5.2.0
+importlib-metadata==6.0.0
     # via twine
 jeepney==0.8.0
     # via
@@ -81,7 +81,7 @@ requests-toolbelt==0.10.1
     # via twine
 rfc3986==2.0.0
     # via twine
-rich==12.6.0
+rich==13.0.0
     # via twine
 secretstorage==3.3.3
     # via keyring
