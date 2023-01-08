@@ -47,7 +47,7 @@ keyring==23.13.1
     # via twine
 mccabe==0.7.0
     # via flake8
-packaging==22.0
+packaging==23.0
     # via tox
 pkginfo==1.9.2
     # via twine
