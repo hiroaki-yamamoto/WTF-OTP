@@ -4,7 +4,7 @@
 #
 #    pip-compile
 #
-bleach==5.0.1
+bleach==6.0.0
     # via readme-renderer
 certifi==2022.12.7
     # via requests
