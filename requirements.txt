@@ -51,7 +51,7 @@ packaging==23.0
     # via tox
 pkginfo==1.9.6
     # via twine
-platformdirs==2.6.2
+platformdirs==3.0.0
     # via virtualenv
 pluggy==1.0.0
     # via tox
