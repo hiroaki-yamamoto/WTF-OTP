@@ -16,7 +16,7 @@ commonmark==0.9.1
     # via rich
 coverage==7.2.1
     # via -r requirements.in
-cryptography==39.0.1
+cryptography==39.0.2
     # via secretstorage
 distlib==0.3.6
     # via virtualenv
@@ -51,7 +51,7 @@ packaging==23.0
     # via tox
 pkginfo==1.9.6
     # via twine
-platformdirs==3.0.0
+platformdirs==3.1.0
     # via virtualenv
 pluggy==1.0.0
     # via tox
@@ -81,7 +81,7 @@ requests-toolbelt==0.10.1
     # via twine
 rfc3986==2.0.0
     # via twine
-rich==13.3.1
+rich==13.3.2
     # via twine
 secretstorage==3.3.3
     # via keyring
@@ -101,7 +101,7 @@ urllib3==1.26.14
     # via
     #   requests
     #   twine
-virtualenv==20.19.0
+virtualenv==20.20.0
     # via tox
 webencodings==0.5.1
     # via bleach
