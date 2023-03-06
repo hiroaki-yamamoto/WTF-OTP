@@ -22,8 +22,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Replace the version
-        run: "sed -i -e \"s/\\[VERSION\\]/${{ github.ref_name }}/\" setup.py"
+      - name: Writing the version
+        run: "echo ${{ github.ref_name }} > VERSION"
       - name: Create the package
         run: python setup.py sdist
       - name: Deploy

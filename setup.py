@@ -13,7 +13,6 @@ dependencies = [
 ]
 name = "WTF-OTP"
 desc = "One-Time Password for WTForms"
-version = "[VERSION]"
 
 if sys.version_info < (2, 7):
     raise RuntimeError(
@@ -25,6 +24,9 @@ try:
         long_desc = readme.read()
 except Exception:
     long_desc = None
+
+with open('VERSION') as version_in:
+    version = version_in.read()
 
 setup(
     name=name,
