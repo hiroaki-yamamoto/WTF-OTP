@@ -37,7 +37,7 @@ flake8-polyfill==1.0.2
     # via -r requirements.in
 idna==3.4
     # via requests
-importlib-metadata==6.3.0
+importlib-metadata==6.4.1
     # via twine
 jeepney==0.8.0
     # via
