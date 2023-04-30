@@ -14,7 +14,7 @@ charset-normalizer==3.1.0
     # via requests
 commonmark==0.9.1
     # via rich
-coverage==7.2.4
+coverage==7.2.5
     # via -r requirements.in
 cryptography==40.0.2
     # via secretstorage
