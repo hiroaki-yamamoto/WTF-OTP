@@ -97,7 +97,7 @@ tox==4.5.1
     # via -r requirements.in
 twine==4.0.2
     # via -r requirements.in
-urllib3==1.26.15
+urllib3==2.0.1
     # via
     #   requests
     #   twine
