@@ -24,7 +24,7 @@ cryptography==40.0.2
     # via secretstorage
 distlib==0.3.6
     # via virtualenv
-docutils==0.19
+docutils==0.20
     # via readme-renderer
 filelock==3.12.0
     # via
@@ -67,7 +67,7 @@ packaging==23.1
     #   tox
 pkginfo==1.9.6
     # via twine
-platformdirs==3.5.0
+platformdirs==3.5.1
     # via
     #   tox
     #   virtualenv
