@@ -89,7 +89,7 @@ pyproject-api==1.5.1
     # via tox
 readme-renderer==37.3
     # via twine
-requests==2.30.0
+requests==2.31.0
     # via
     #   requests-toolbelt
     #   twine
