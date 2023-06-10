@@ -67,7 +67,7 @@ packaging==23.1
     #   tox
 pkginfo==1.9.6
     # via twine
-platformdirs==3.5.1
+platformdirs==3.5.2
     # via
     #   tox
     #   virtualenv
@@ -105,11 +105,11 @@ six==1.16.0
     # via bleach
 snowballstemmer==2.2.0
     # via pydocstyle
-tox==4.5.2
+tox==4.6.0
     # via -r requirements.in
 twine==4.0.2
     # via -r requirements.in
-urllib3==2.0.2
+urllib3==2.0.3
     # via
     #   requests
     #   twine
