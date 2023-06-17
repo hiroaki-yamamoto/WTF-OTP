@@ -53,7 +53,7 @@ jeepney==0.8.0
     #   secretstorage
 keyring==23.13.1
     # via twine
-markdown-it-py==2.2.0
+markdown-it-py==3.0.0
     # via rich
 mccabe==0.7.0
     # via flake8
