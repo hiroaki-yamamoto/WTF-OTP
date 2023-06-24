@@ -51,7 +51,7 @@ jeepney==0.8.0
     # via
     #   keyring
     #   secretstorage
-keyring==23.13.1
+keyring==24.2.0
     # via twine
 markdown-it-py==3.0.0
     # via rich
@@ -87,7 +87,7 @@ pygments==2.15.1
     #   rich
 pyproject-api==1.5.2
     # via tox
-readme-renderer==37.3
+readme-renderer==40.0
     # via twine
 requests==2.31.0
     # via
