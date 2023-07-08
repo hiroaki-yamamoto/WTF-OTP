@@ -14,7 +14,7 @@ cffi==1.15.1
     # via cryptography
 chardet==5.1.0
     # via tox
-charset-normalizer==3.1.0
+charset-normalizer==3.2.0
     # via requests
 colorama==0.4.6
     # via tox
@@ -41,7 +41,7 @@ flake8-polyfill==1.0.2
     # via -r requirements.in
 idna==3.4
     # via requests
-importlib-metadata==6.7.0
+importlib-metadata==6.8.0
     # via
     #   keyring
     #   twine
@@ -67,7 +67,7 @@ packaging==23.1
     #   tox
 pkginfo==1.9.6
     # via twine
-platformdirs==3.8.0
+platformdirs==3.8.1
     # via
     #   tox
     #   virtualenv
@@ -85,7 +85,7 @@ pygments==2.15.1
     # via
     #   readme-renderer
     #   rich
-pyproject-api==1.5.2
+pyproject-api==1.5.3
     # via tox
 readme-renderer==40.0
     # via twine
@@ -105,7 +105,7 @@ six==1.16.0
     # via bleach
 snowballstemmer==2.2.0
     # via pydocstyle
-tox==4.6.3
+tox==4.6.4
     # via -r requirements.in
 twine==4.0.2
     # via -r requirements.in
