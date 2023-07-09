@@ -45,7 +45,7 @@ importlib-metadata==6.8.0
     # via
     #   keyring
     #   twine
-jaraco-classes==3.2.3
+jaraco-classes==3.3.0
     # via keyring
 jeepney==0.8.0
     # via
@@ -117,5 +117,5 @@ virtualenv==20.23.1
     # via tox
 webencodings==0.5.1
     # via bleach
-zipp==3.15.0
+zipp==3.16.0
     # via importlib-metadata
