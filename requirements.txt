@@ -67,7 +67,7 @@ packaging==23.1
     #   tox
 pkginfo==1.9.6
     # via twine
-platformdirs==3.8.1
+platformdirs==3.9.0
     # via
     #   tox
     #   virtualenv
