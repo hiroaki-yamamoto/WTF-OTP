@@ -85,7 +85,7 @@ pygments==2.16.1
     # via
     #   readme-renderer
     #   rich
-pyproject-api==1.5.3
+pyproject-api==1.5.4
     # via tox
 readme-renderer==40.0
     # via twine
@@ -105,7 +105,7 @@ six==1.16.0
     # via bleach
 snowballstemmer==2.2.0
     # via pydocstyle
-tox==4.8.0
+tox==4.9.0
     # via -r requirements.in
 twine==4.0.2
     # via -r requirements.in
