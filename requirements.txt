@@ -105,7 +105,7 @@ six==1.16.0
     # via bleach
 snowballstemmer==2.2.0
     # via pydocstyle
-tox==4.9.0
+tox==4.10.0
     # via -r requirements.in
 twine==4.0.2
     # via -r requirements.in
