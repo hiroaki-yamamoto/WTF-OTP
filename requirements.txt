@@ -18,7 +18,7 @@ charset-normalizer==3.2.0
     # via requests
 colorama==0.4.6
     # via tox
-coverage==7.3.0
+coverage==7.3.1
     # via -r requirements.in
 cryptography==41.0.3
     # via secretstorage
@@ -105,7 +105,7 @@ six==1.16.0
     # via bleach
 snowballstemmer==2.2.0
     # via pydocstyle
-tox==4.11.1
+tox==4.11.3
     # via -r requirements.in
 twine==4.0.2
     # via -r requirements.in
@@ -113,7 +113,7 @@ urllib3==2.0.4
     # via
     #   requests
     #   twine
-virtualenv==20.24.4
+virtualenv==20.24.5
     # via tox
 webencodings==0.5.1
     # via bleach
