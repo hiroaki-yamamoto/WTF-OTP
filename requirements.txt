@@ -87,7 +87,7 @@ pygments==2.16.1
     #   rich
 pyproject-api==1.6.1
     # via tox
-readme-renderer==41.0
+readme-renderer==42.0
     # via twine
 requests==2.31.0
     # via
