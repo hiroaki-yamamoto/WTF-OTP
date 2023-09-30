@@ -5,7 +5,7 @@
 #    pip-compile --output-file requirements.txt requirements.in
 #
 click==8.1.7                # via flask
-flask-wtf==1.1.1
+flask-wtf==1.1.2
 flask==2.3.3
 itsdangerous==2.1.2       # via flask
 jinja2==3.1.2              # via flask
