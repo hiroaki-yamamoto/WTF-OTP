@@ -23,6 +23,7 @@ jobs:
         with:
           key: ${{ runner.os }}-${{ hashFiles('./requirements.txt') }}
           path: |
+            ~/.cache/pypoetry
             ~/.cache/pip
             ./.tox
       - name: Download coverage
