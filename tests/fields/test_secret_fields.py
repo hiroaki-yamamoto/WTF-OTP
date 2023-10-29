@@ -46,9 +46,7 @@ class QRCodeTest(TestCase):
 
     def test_qrcode(self):
         """qrcode_url should be copied to kwargs."""
-        self.assertDictContainsSubset({
-            "qrcode_url": "/qrcode"
-        }, self.form.otp.render_kw)
+        self.assertEqual(self.form.otp.render_kw["qrcode_url"], "/qrcode")
 
 
 class SecretFieldTest(FieldTestBase):
@@ -64,8 +62,8 @@ class SecretFieldGenerationTest(FieldTestBase):
 
     def test_secret_generation(self):
         """Should generate QR-Code."""
-        self.assertRegexpMatches(
-            self.form.otp.generate(), re.compile("^[A-Z,2-7]{16,}$")
+        self.assertTrue(
+            re.compile("^[A-Z,2-7]{16,}$").match(self.form.otp.generate())
         )
 
     @patch("wtf_otp.fields.secret_key.random_base32")
