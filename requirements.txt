@@ -6,7 +6,7 @@
 #
 bleach==6.1.0
     # via readme-renderer
-cachetools==5.3.1
+cachetools==5.3.2
     # via tox
 certifi==2023.7.22
     # via requests
@@ -20,13 +20,13 @@ colorama==0.4.6
     # via tox
 coverage==7.3.2
     # via -r requirements.in
-cryptography==41.0.4
+cryptography==41.0.5
     # via secretstorage
 distlib==0.3.7
     # via virtualenv
 docutils==0.20.1
     # via readme-renderer
-filelock==3.12.4
+filelock==3.13.0
     # via
     #   tox
     #   virtualenv
@@ -113,7 +113,7 @@ urllib3==2.0.7
     # via
     #   requests
     #   twine
-virtualenv==20.24.5
+virtualenv==20.24.6
     # via tox
 webencodings==0.5.1
     # via bleach
