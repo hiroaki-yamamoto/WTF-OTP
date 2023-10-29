@@ -32,18 +32,17 @@ jobs:
           chmod +x ./cc-test-reporter
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install flake8 pytest
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          curl -sSL https://install.python-poetry.org | python3 -
+          poetry install
       - name: Test & Send Coverage
         run: |
           export GIT_COMMITTED_AT=$(date +%s)
           ./cc-test-reporter before-build
-          tox -p all -q
+          poetry run -- tox -p all -q
           export TEST_RESULT=${?}
           export GIT_BRANCH=${{ github.ref_name }}
           echo $GIT_BRANCH
-          coverage xml
+          poetry run -- coverage xml
           ./cc-test-reporter after-build --exit-code $TEST_RESULT -t coverage.py
         env:
           GIT_COMMIT_SHA: ${{ github.sha }}

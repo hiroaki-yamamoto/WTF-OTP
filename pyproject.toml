@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "wtf-otp"
+version = "0.0.0"
+description = "One-Time Password for WTForms"
+authors = ["Hiroaki Yamamoto <my1NGtr0d5p9fAEHZTw6id3rCGfB1mPJ@hysoftware.net>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+wtforms = "^3.1.0"
+pyotp = "^2.9.0"
+jinja2 = "^3.1.2"
+qrcode = "^7.4.2"
+
+
+[tool.poetry.group.dev.dependencies]
+tox = "^4.11.3"
+flake8 = "^6.1.0"
+flake8-docstrings = "^1.7.0"
+flake8-polyfill = "^1.0.2"
+coverage = "^7.3.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
