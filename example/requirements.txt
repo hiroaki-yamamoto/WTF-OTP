@@ -9,6 +9,6 @@ flask-wtf==1.2.1
 flask==3.0.3
 itsdangerous==2.2.0       # via flask
 jinja2==3.1.4              # via flask
-markupsafe==2.1.5           # via jinja2
+markupsafe==3.0.1           # via jinja2
 werkzeug==3.0.4          # via flask
 wtforms==3.1.2            # via flask-wtf
