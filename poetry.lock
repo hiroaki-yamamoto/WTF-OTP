@@ -437,13 +437,13 @@ files = [
 
 [[package]]
 name = "tox"
-version = "4.23.0"
+version = "4.23.2"
 description = "tox is a generic virtualenv management and test command line tool"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "tox-4.23.0-py3-none-any.whl", hash = "sha256:46da40afb660e46238c251280eb910bdaf00b390c7557c8e4bb611f422e9db12"},
-    {file = "tox-4.23.0.tar.gz", hash = "sha256:a6bd7d54231d755348d3c3a7b450b5bf6563833716d1299a1619587a1b77a3bf"},
+    {file = "tox-4.23.2-py3-none-any.whl", hash = "sha256:452bc32bb031f2282881a2118923176445bac783ab97c874b8770ab4c3b76c38"},
+    {file = "tox-4.23.2.tar.gz", hash = "sha256:86075e00e555df6e82e74cfc333917f91ecb47ffbc868dcafbd2672e332f4a2c"},
 ]
 
 [package.dependencies]
@@ -456,6 +456,9 @@ platformdirs = ">=4.3.6"
 pluggy = ">=1.5"
 pyproject-api = ">=1.8"
 virtualenv = ">=20.26.6"
+
+[package.extras]
+test = ["devpi-process (>=1.0.2)", "pytest (>=8.3.3)", "pytest-mock (>=3.14)"]
 
 [[package]]
 name = "typing-extensions"
@@ -490,13 +493,13 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 
 [[package]]
 name = "wtforms"
-version = "3.2.0"
+version = "3.2.1"
 description = "Form validation and rendering for Python web development."
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "wtforms-3.2.0-py3-none-any.whl", hash = "sha256:1f377b4c3fdf48e05e36a373bd4402b1dc3b3aab0791418d5e9ad808bee34134"},
-    {file = "wtforms-3.2.0.tar.gz", hash = "sha256:8433188faea36077db4513ade7ba0bb671175d2a72de16c198e92760b9298a66"},
+    {file = "wtforms-3.2.1-py3-none-any.whl", hash = "sha256:583bad77ba1dd7286463f21e11aa3043ca4869d03575921d1a1698d0715e0fd4"},
+    {file = "wtforms-3.2.1.tar.gz", hash = "sha256:df3e6b70f3192e92623128123ec8dca3067df9cfadd43d59681e210cfb8d4682"},
 ]
 
 [package.dependencies]
