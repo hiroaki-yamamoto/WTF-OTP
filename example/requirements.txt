@@ -6,7 +6,7 @@
 #
 click==8.2.0                # via flask
 flask-wtf==1.2.2
-flask==3.1.0
+flask==3.1.1
 itsdangerous==2.2.0       # via flask
 jinja2==3.1.6              # via flask
 markupsafe==3.0.2           # via jinja2
