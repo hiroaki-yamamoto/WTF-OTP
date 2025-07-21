@@ -9,10 +9,10 @@
 [Test Status Link]: https://github.com/hiroaki-yamamoto/WTF-OTP/actions/workflows/python-test.yml
 [Deploy Status]: https://github.com/hiroaki-yamamoto/WTF-OTP/actions/workflows/python-deploy.yml/badge.svg
 [Deploy Status Link]: https://github.com/hiroaki-yamamoto/WTF-OTP/actions/workflows/python-deploy.yml
-[Maintainability]: https://api.codeclimate.com/v1/badges/c03f10d1351fa391e1d2/maintainability
-[Maintainability Link]: https://codeclimate.com/github/hiroaki-yamamoto/WTF-OTP/maintainability
-[Test Coverage]: https://api.codeclimate.com/v1/badges/c03f10d1351fa391e1d2/test_coverage
-[Coverage Link]: https://codeclimate.com/github/hiroaki-yamamoto/WTF-OTP/test_coverage
+[Maintainability]: https://qlty.sh/gh/hiroaki-yamamoto/projects/WTF-OTP/maintainability.svg
+[Maintainability Link]: https://qlty.sh/gh/hiroaki-yamamoto/projects/WTF-OTP
+[Test Coverage]: https://qlty.sh/gh/hiroaki-yamamoto/projects/WTF-OTP/coverage.svg
+[Coverage Link]: https://qlty.sh/gh/hiroaki-yamamoto/projects/WTF-OTP
 
 
 ## What This?
