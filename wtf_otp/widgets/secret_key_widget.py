@@ -3,7 +3,6 @@
 
 """OTP Widgets."""
 from jinja2 import Environment, PackageLoader
-from markupsafe import Markup
 from wtforms.widgets import html_params
 
 
@@ -19,7 +18,8 @@ class OTPSecretKeyWidget(object):
     def __init__(self):
         """Initialize the widget."""
         self.templates = Environment(
-            loader=PackageLoader("wtf_otp.widgets")
+            loader=PackageLoader("wtf_otp.widgets"),
+            autoescape=True,
         )
         self.templates.globals["attrs"] = html_params
 
@@ -81,8 +81,8 @@ class OTPSecretKeyWidget(object):
             if defaultvalue:
                 script_args["data"] = defaultvalue
 
-        return Markup(self.templates.get_template("widget.html").render(
+        return self.templates.get_template("widget.html").render(
             input_args=input_args, script_args=script_args,
             qrcode=qrcode, button_args=button_args,
             div_args=div_args
-        ))
+        )
