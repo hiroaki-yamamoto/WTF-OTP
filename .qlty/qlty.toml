@@ -51,6 +51,7 @@ test_patterns = [
   "**/*_spec.*",
   "**/test_*.*",
   "**/spec_*.*",
+  "**/tests/**",
 ]
 
 [smells]
@@ -100,10 +101,7 @@ name = "ruff"
 
 [[plugin]]
 name = "trivy"
-drivers = [
-  "config",
-  "fs-vuln",
-]
+drivers = ["config", "fs-vuln"]
 
 [[plugin]]
 name = "trufflehog"
