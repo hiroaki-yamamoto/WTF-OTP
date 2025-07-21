@@ -26,11 +26,6 @@ jobs:
             ~/.cache/pypoetry
             ~/.cache/pip
             ./.tox
-      - name: Download coverage
-        run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 \
-            -o ./cc-test-reporter
-          chmod +x ./cc-test-reporter
       - name: Install dependencies
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
@@ -38,15 +33,17 @@ jobs:
       - name: Test & Send Coverage
         run: |
           export GIT_COMMITTED_AT=$(date +%s)
-          ./cc-test-reporter before-build
           poetry run -- tox -p all -q
           export TEST_RESULT=${?}
           export GIT_BRANCH=${{ github.ref_name }}
           echo $GIT_BRANCH
-          poetry run -- coverage xml
-          ./cc-test-reporter after-build --exit-code $TEST_RESULT -t coverage.py
+          poetry run -- coverage lcov
         env:
           GIT_COMMIT_SHA: ${{ github.sha }}
           CI_NAME: "Github Action"
           CI_BUILD_ID: ${{ github.run_number }}
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      - uses: qltysh/qlty-action/coverage@v1
+        with:
+          oidc: true
+          files: ./coverage.lcov
