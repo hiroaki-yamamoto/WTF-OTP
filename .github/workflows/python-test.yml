@@ -47,7 +47,7 @@ jobs:
           CI_NAME: "Github Action"
           CI_BUILD_ID: ${{ github.run_number }}
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-      - uses: qltysh/qlty-action/coverage@v1
+      - uses: qltysh/qlty-action/coverage@v2
         with:
           oidc: true
           files: ./coverage.lcov
