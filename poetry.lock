@@ -153,13 +153,13 @@ files = [
 
 [[package]]
 name = "filelock"
-version = "3.24.3"
+version = "3.25.0"
 description = "A platform independent file lock."
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "filelock-3.24.3-py3-none-any.whl", hash = "sha256:426e9a4660391f7f8a810d71b0555bce9008b0a1cc342ab1f6947d37639e002d"},
-    {file = "filelock-3.24.3.tar.gz", hash = "sha256:011a5644dc937c22699943ebbfc46e969cdde3e171470a6e40b9533e5a72affa"},
+    {file = "filelock-3.25.0-py3-none-any.whl", hash = "sha256:5ccf8069f7948f494968fc0713c10e5c182a9c9d9eef3a636307a20c2490f047"},
+    {file = "filelock-3.25.0.tar.gz", hash = "sha256:8f00faf3abf9dc730a1ffe9c354ae5c04e079ab7d3a683b7c32da5dd05f26af3"},
 ]
 
 [[package]]
@@ -507,13 +507,13 @@ files = [
 
 [[package]]
 name = "tox"
-version = "4.46.3"
+version = "4.47.0"
 description = "tox is a generic virtualenv management and test command line tool"
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "tox-4.46.3-py3-none-any.whl", hash = "sha256:e9e1a91bce2836dba8169c005254913bd22aac490131c75a5ffc4fd091dffe0b"},
-    {file = "tox-4.46.3.tar.gz", hash = "sha256:2e87609b7832c818cad093304ea23d7eb124f8ecbab0625463b73ce5e850e1c2"},
+    {file = "tox-4.47.0-py3-none-any.whl", hash = "sha256:79260c47814086313eea516c6cd4ce374f93c19be2de6125e7d330356a000364"},
+    {file = "tox-4.47.0.tar.gz", hash = "sha256:db08368214f6f44b3e9b6c6e937140e25a4b0cea63f8489bf1c9b6b34d3e42e3"},
 ]
 
 [package.dependencies]
