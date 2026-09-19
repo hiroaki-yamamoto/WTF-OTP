@@ -524,13 +524,13 @@ files = [
 
 [[package]]
 name = "tox"
-version = "4.62.0"
+version = "4.63.0"
 description = "tox is a generic virtualenv management and test command line tool"
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "tox-4.62.0-py3-none-any.whl", hash = "sha256:99979ebae1d657706cb84f176fbdf012d606bf16c014b4be6c90af8b736515ff"},
-    {file = "tox-4.62.0.tar.gz", hash = "sha256:4095724c046c32c52e24066f2e55006f3ac4480e733d144e03d81f2f3ece040f"},
+    {file = "tox-4.63.0-py3-none-any.whl", hash = "sha256:e8c560a9124e127c5e0547912d2ae1ef948dbba2fdea0b8d506e609a126b2e47"},
+    {file = "tox-4.63.0.tar.gz", hash = "sha256:fb7105ef125b371e31797cfa615e5a160de3d8ef29b86dca7fcbd9048da3a9d8"},
 ]
 
 [package.dependencies]
@@ -563,13 +563,13 @@ files = [
 
 [[package]]
 name = "virtualenv"
-version = "21.7.16"
+version = "21.8.1"
 description = "Virtual Python Environment builder"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "virtualenv-21.7.16-py3-none-any.whl", hash = "sha256:752fd5d5352502fbd794422983eed65a249fc6f4685c5e2122fd6052e6477a11"},
-    {file = "virtualenv-21.7.16.tar.gz", hash = "sha256:d3fcf6954a07121c2b61efcb96419e2f40b3718d558998f13a7314e32cc42723"},
+    {file = "virtualenv-21.8.1-py3-none-any.whl", hash = "sha256:0685ab90c9c3748dd6c99631207bda9fb359c72c28337047e719c83fb41a7a59"},
+    {file = "virtualenv-21.8.1.tar.gz", hash = "sha256:529a4c883b4efa067b98cfb61b64cdc0e453d01800ef5b5a29d0a9c514499a4f"},
 ]
 
 [package.dependencies]
