@@ -513,13 +513,13 @@ files = [
 
 [[package]]
 name = "pyproject-api"
-version = "1.11.4"
+version = "1.11.5"
 description = "API to interact with the python pyproject.toml based projects"
 optional = false
-python-versions = ">=3.10"
+python-versions = ">=3.11"
 files = [
-    {file = "pyproject_api-1.11.4-py3-none-any.whl", hash = "sha256:30921dec1f85946dd47664536a003b2aea3a8be18e334c93ed12f6a8b1e60c76"},
-    {file = "pyproject_api-1.11.4.tar.gz", hash = "sha256:42332ebb8e5e510a3a9ea498cedb5723134ddd46ddfe2d07693917b2ebea22a7"},
+    {file = "pyproject_api-1.11.5-py3-none-any.whl", hash = "sha256:aa546f4e4b76a4ad8412c35dc34cfb5d823172c4a43b44ccd95e75a934990d4a"},
+    {file = "pyproject_api-1.11.5.tar.gz", hash = "sha256:79294e79953a30fd3eac04bdf8b57241d33e2c8b7230b94c1b76e4d765fe09ad"},
 ]
 
 [package.dependencies]
