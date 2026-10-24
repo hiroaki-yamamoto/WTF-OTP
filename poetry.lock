@@ -634,13 +634,13 @@ python-discovery = ">=1.6.1"
 
 [[package]]
 name = "wtforms"
-version = "3.3.0"
+version = "3.3.1"
 description = "Form validation and rendering for Python web development."
 optional = false
 python-versions = ">=3.11"
 files = [
-    {file = "wtforms-3.3.0-py3-none-any.whl", hash = "sha256:eaf2f7649bedbee0bad74bb068dca8bfec8b00d04fd44c1735682c1fe33acfa7"},
-    {file = "wtforms-3.3.0.tar.gz", hash = "sha256:efbc626b0b68d3bcb77822e0eceb995f56c5e9d0aeb4220b9dc2fc9f03e7e1ed"},
+    {file = "wtforms-3.3.1-py3-none-any.whl", hash = "sha256:2f4728ef3f67173c22590e60e845937598af7455474330fdb84354a609d67ec1"},
+    {file = "wtforms-3.3.1.tar.gz", hash = "sha256:9d10ccb5740290c9ae6673522d87bcae3b669cf0cb4e4584aee229b4694af10c"},
 ]
 
 [package.dependencies]
